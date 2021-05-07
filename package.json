@@ -1,0 +1,21 @@
+{
+  "name": "@tmbr/utils",
+  "author": "TMBR (https://wearetmbr.com/)",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": " collection of small and commonly used helper functions",
+  "repository": "https://github.com/TMBR/tmbr-utils",
+  "source": "index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "microbundle watch --format es --no-compress",
+    "build": "microbundle build --format es --no-sourcemap",
+    "prebuild": "rm -rf dist/*",
+    "postbuild": "npm run test"
+  },
+  "devDependencies": {
+    "microbundle": "^0.13.0"
+  }
+}
