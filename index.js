@@ -9,7 +9,7 @@ export { default as walk } from './dom/walk';
 
 export { default as average } from './math/average';
 export { default as clamp } from './math/clamp';
-export { default as distance } from './math/diagonal';
+export { default as diagonal } from './math/diagonal';
 export { default as distance } from './math/distance';
 export { default as lerp } from './math/lerp';
 export { default as luminance } from './math/luminance';
