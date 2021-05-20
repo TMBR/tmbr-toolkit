@@ -1,7 +1,7 @@
 {
   "name": "@tmbr/utils",
   "author": "TMBR (https://wearetmbr.com/)",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "repository": "https://github.com/TMBR/tmbr-utils",
   "description": "A collection of small utility functions",
