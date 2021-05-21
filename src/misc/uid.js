@@ -4,6 +4,6 @@ function now() {
   return (now.last = time) > last ? time : last + 1;
 }
 
-export default function uid(prefix = '', suffix = '') {
+export function uid(prefix = '', suffix = '') {
   return prefix + now().toString(36) + suffix;
 }

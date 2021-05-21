@@ -1,4 +1,4 @@
-import { lerp, normalize } from '../';
+import { lerp, normalize } from '..';
 
 /**
  * Maps a value from one range to another

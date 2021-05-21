@@ -1,4 +1,4 @@
-import { isNumber } from '../';
+import { isNumber } from '..';
 
 export function isNumeric(value) {
   return isNumber(value)

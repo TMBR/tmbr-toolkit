@@ -1,4 +1,4 @@
-import { isFunction, isUndefined } from '../';
+import { isFunction, isUndefined } from '..';
 
 /**
  * Bind functions to a context or class instance

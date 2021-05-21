@@ -1,4 +1,4 @@
-import { isArray, isObject, isString, isUndefined } from '../';
+import { isArray, isObject, isString, isUndefined } from '..';
 
 export function isEmpty(value) {
 
