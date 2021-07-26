@@ -1,12 +1,13 @@
 {
   "name": "@tmbr/utils",
-  "author": "TMBR (https://wearetmbr.com/)",
   "version": "0.0.3",
+  "description": "A collection of small utility functions",
+  "author": "TMBR (https://wearetmbr.com/)",
   "license": "MIT",
   "repository": "https://github.com/TMBR/tmbr-utils",
-  "description": "A collection of small utility functions",
   "main": "src/index.js",
   "files": [
     "src"
-  ]
+  ],
+  "sideEffects": false
 }
