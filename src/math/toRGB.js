@@ -10,4 +10,4 @@ export function toRGB(hex) {
     parseInt(result[2], 16),
     parseInt(result[3], 16)
   ] : null;
-}
+};

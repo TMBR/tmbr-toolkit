@@ -6,4 +6,4 @@
 export function shuffle(array) {
   const rand = () => 0.5 - Math.random();
   return (arguments.length === 1) ? array.sort(rand) : rand();
-}
+};

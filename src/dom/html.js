@@ -1,4 +1,4 @@
-export function htm(strings, ...vars) {
+export function html(strings, ...vars) {
 
   let result = '';
   const appends = [];

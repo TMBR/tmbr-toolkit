@@ -1,7 +1,7 @@
 export { cx } from './dom/cx';
 export { findAll } from './dom/findAll';
 export { findOne } from './dom/findOne';
-export { htm } from './dom/htm';
+export { html } from './dom/html';
 export { index } from './dom/index';
 export { rect } from './dom/rect';
 export { svg } from './dom/svg';

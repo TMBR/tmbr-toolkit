@@ -5,4 +5,4 @@ export function slug(str) {
     .replace(/\-\-+/g, '-')
     .replace(/^-+/, '')
     .replace(/-+$/, '');
-}
+};

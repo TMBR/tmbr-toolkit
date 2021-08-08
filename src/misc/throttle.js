@@ -1,4 +1,4 @@
-function throttle(fn, limit) {
+export function throttle(fn, limit) {
   let throttled;
   return function() {
     if (!throttled) {
@@ -7,4 +7,4 @@ function throttle(fn, limit) {
       setTimeout(() => throttled = false, limit);
     }
   }
-}
+};

@@ -13,4 +13,4 @@ export function isEmpty(value) {
   }
 
   return false;
-}
+};
