@@ -14,9 +14,16 @@ export function request(method, url, data, headers = {}) {
     config.body = JSON.stringify(data || {});
   }
 
-  return window
-    .fetch(url, config)
-    .then(res => res.json().then(json => res.ok ? json : Promise.reject(json)));
+  function respond(res) {
+    return new Promise((resolve, reject) => {
+      res.text().then(body => {
+        const data = JSON.parse(body || null);
+        res.ok ? resolve(data) : reject({errors: data, status: res.status});
+      })
+    });
+  }
+
+  return fetch(url, config).then(respond);
 };
 
 ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].forEach(method => {
