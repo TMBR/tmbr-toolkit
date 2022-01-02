@@ -1,15 +1,41 @@
-import { isFunction, isUndefined } from '..';
+import { isFunction } from '..';
 
 /**
  * Bind functions to a context or class instance
+ * https://www.npmjs.com/package/auto-bind
  *
  * @param  {object}
  * @param  {array}
  * @return {void}
  */
-export function bind(context, fns) {
-  fns = isUndefined(fns)
-    ? Object.getOwnPropertyNames(context).filter(isFunction)
-    : [].concat(fns);
-  fns.forEach(fn => context[fn] = context[fn].bind(context));
-};
+export function bind(self, fns) {
+
+  if (fns) {
+    fns = [].concat(fns);
+    fns.forEach(fn => isFunction(self[fn]) && (self[fn] = self[fn].bind(self)));
+    return self;
+  }
+
+  const properties = new Set();
+  let object = self.constructor.prototype;
+
+  do {
+
+    for (const key of Reflect.ownKeys(object)) {
+      if (key === 'constructor') continue;
+			properties.add([object, key]);
+		}
+
+	} while ((object = Reflect.getPrototypeOf(object)) && object !== Object.prototype);
+
+	for (const [object, key] of properties) {
+
+		const descriptor = Reflect.getOwnPropertyDescriptor(object, key);
+
+		if (isFunction(descriptor?.value)) {
+      self[key] = self[key].bind(self);
+		}
+	}
+
+	return self;
+}
