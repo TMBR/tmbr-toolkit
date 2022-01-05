@@ -4,6 +4,6 @@
  * @param {HTMLElement}
  * @return {number}
  */
-export function index(el) {
+export function indexOf(el) {
   return Array.from(el.parentNode.children).indexOf(el);
 };

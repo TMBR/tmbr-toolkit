@@ -9,7 +9,7 @@
  */
 export function random(min, max) {
 
-  if (arguments.length == 0) {
+  if (arguments.length === 0) {
     return Math.random();
   }
 
@@ -17,8 +17,8 @@ export function random(min, max) {
     return min[ Math.floor(Math.random() * min.length) ];
   }
 
-  if (typeof min == 'undefined') min = 1;
-  if( typeof max == 'undefined') max = min || 1, min = 0;
+  if (min === undefined) min = 1;
+  if (max === undefined) max = min || 1, min = 0;
 
   return min + Math.random() * (max - min);
 };

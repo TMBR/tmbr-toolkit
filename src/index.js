@@ -2,14 +2,16 @@ export { cx } from './dom/cx';
 export { findAll } from './dom/findAll';
 export { findOne } from './dom/findOne';
 export { html } from './dom/html';
-export { index } from './dom/index';
+export { on } from './dom/on';
+export { indexOf } from './dom/indexOf';
 export { rect } from './dom/rect';
+export { setProperty } from './dom/setProperty';
 export { svg } from './dom/svg';
 export { walk } from './dom/walk';
 
 export { average } from './math/average';
+export { brightness } from './math/brightness';
 export { clamp } from './math/clamp';
-export { diagonal } from './math/diagonal';
 export { distance } from './math/distance';
 export { lerp } from './math/lerp';
 export { luminance } from './math/luminance';
@@ -26,6 +28,7 @@ export { wrap } from './math/wrap';
 
 export { bind } from './misc/bind';
 export { debounce } from './misc/debounce';
+export { createWorker } from './misc/createWorker';
 export { fill } from './misc/fill';
 export { noop } from './misc/noop';
 export { parse } from './misc/parse';

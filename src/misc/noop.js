@@ -1,1 +1,1 @@
-export const noop = fn => fn;
+export const noop = () => {};
