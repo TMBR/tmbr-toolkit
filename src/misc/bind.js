@@ -26,7 +26,7 @@ export function bind(self) {
 
     const descriptor = Reflect.getOwnPropertyDescriptor(object, key);
 
-    if (isFunction(descriptor?.value)) {
+    if (descriptor && isFunction(descriptor.value)) {
       self[key] = self[key].bind(self);
     }
   }
