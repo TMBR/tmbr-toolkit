@@ -4,6 +4,7 @@ export { findOne } from './dom/findOne';
 export { html } from './dom/html';
 export { on } from './dom/on';
 export { indexOf } from './dom/indexOf';
+export { io } from './dom/io';
 export { rect } from './dom/rect';
 export { setProperty } from './dom/setProperty';
 export { svg } from './dom/svg';
