@@ -1,10 +1,11 @@
 /**
- * Rounds a value
+ * Rounds a value to the specificed number of decimal places.
  *
- * @param  {number} v Value to round
- * @param  {number} p Precision
- * @return {number}   Rounded value
+ * @param  {number} n         number to round
+ * @param  {number} precision decimal places
+ * @return {number}           rounded value
  */
-export function round(v, p = 1000) {
-  return Math.round(v * p) / p;
+export function round(n, precision = 2) {
+  const d = Math.pow(10, precision);
+  return Math.round(n * d) / d;
 };
