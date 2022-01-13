@@ -6,8 +6,6 @@
   "license": "MIT",
   "repository": "https://github.com/TMBR/tmbr-utils",
   "main": "src/index.js",
-  "files": [
-    "src"
-  ],
+  "files": ["src"],
   "sideEffects": false
 }
