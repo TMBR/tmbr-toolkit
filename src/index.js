@@ -6,6 +6,7 @@ export { on } from './dom/on';
 export { indexOf } from './dom/indexOf';
 export { io } from './dom/io';
 export { rect } from './dom/rect';
+export { ro } from './dom/ro';
 export { setProperty } from './dom/setProperty';
 export { svg } from './dom/svg';
 export { walk } from './dom/walk';
