@@ -3,6 +3,7 @@ export { findAll } from './dom/findAll';
 export { findOne } from './dom/findOne';
 export { html } from './dom/html';
 export { on } from './dom/on';
+export { observe } from './dom/observe';
 export { indexOf } from './dom/indexOf';
 export { io } from './dom/io';
 export { rect } from './dom/rect';
