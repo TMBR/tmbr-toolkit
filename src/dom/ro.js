@@ -1,7 +1,9 @@
+import { isFunction } from '..';
+
 export function ro(el, callback) {
 
   ro.instance ??= new ResizeObserver(all => all.forEach(e => {
-    callback(e);
+    isFunction(callback) && callback(e);
   }));
 
   ro.instance.observe(el);
