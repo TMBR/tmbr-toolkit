@@ -1,4 +1,4 @@
-import { io, ro } from '.';
+import { io, ro } from '..';
 
 export function observe(el, callbacks = {}) {
 
