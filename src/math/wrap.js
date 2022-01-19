@@ -1,3 +1,5 @@
+// import { isArray } from '..';
+
 /**
  * Wrap an index around the given length using the modulo operator
  *
@@ -10,6 +12,7 @@
  * @return {number}        Looped index
  */
 export function wrap(index, length) {
+  // isArray(length) && (length = length.length);
   return index < 0
     ? (index = length + (index % length))
     : index >= length
