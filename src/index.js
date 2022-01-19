@@ -1,3 +1,4 @@
+export { coords } from './dom/coords';
 export { cx } from './dom/cx';
 export { findAll } from './dom/findAll';
 export { findOne } from './dom/findOne';
