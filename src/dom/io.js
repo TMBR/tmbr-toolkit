@@ -1,18 +1,53 @@
-import { isFunction } from '..';
+import { isUndefined, isFunction } from '..';
+
+let instance;
+let elements;
+
+function handleAll(entries) {
+  entries.forEach(handleOne);
+}
+
+function handleOne(entry) {
+  elements.get(entry.target).forEach(obj => {
+    entry.isIntersecting ? obj.enter(entry) : obj.leave(entry);
+  });
+}
 
 export function io(el, enter, leave, once = false) {
 
-  io.instance ??= new IntersectionObserver(all => all.forEach(e => {
-      if (e.isIntersecting) {
-        isFunction(enter) && enter(e);
-        once && unobserve();
-      } else {
-        isFunction(leave) && leave(e);
-      }
-  }));
+  if (isUndefined(instance)) {
+    instance = new IntersectionObserver(handleAll);
+    elements = new Map();
+  }
 
-  io.instance.observe(el);
-  const unobserve = () => io.instance.unobserve(el);
+  if (!elements.has(el)) {
+    instance.observe(el);
+  }
+
+  const obj = {
+    enter: entry => {
+      isFunction(enter) && enter(entry);
+      once && unobserve();
+    },
+    leave: entry => {
+      isFunction(leave) && leave(entry);
+    }
+  };
+
+  const callbacks = elements.get(el) || [];
+  callbacks.push(obj);
+  elements.set(el, callbacks);
+
+  const unobserve = () => {
+
+    const index = callbacks.indexOf(obj);
+    callbacks.splice(index, 1);
+
+    if (callbacks.length === 0) {
+      instance.unobserve(el);
+      elements.delete(el);
+    }
+  };
 
   return unobserve;
 };
