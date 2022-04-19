@@ -1,14 +1,14 @@
 import { isUndefined, isFunction } from '..';
 
 let instance;
-let elements;
+let map;
 
 function handleAll(entries) {
   entries.forEach(handleOne);
 }
 
 function handleOne(entry) {
-  elements.get(entry.target).forEach(obj => {
+  map.get(entry.target).forEach(obj => {
     entry.isIntersecting ? obj.enter(entry) : obj.leave(entry);
   });
 }
@@ -17,10 +17,10 @@ export function io(el, enter, leave, once = false) {
 
   if (isUndefined(instance)) {
     instance = new IntersectionObserver(handleAll);
-    elements = new Map();
+    map = new Map();
   }
 
-  if (!elements.has(el)) {
+  if (!map.has(el)) {
     instance.observe(el);
   }
 
@@ -34,9 +34,9 @@ export function io(el, enter, leave, once = false) {
     }
   };
 
-  const callbacks = elements.get(el) || [];
+  const callbacks = map.get(el) || [];
   callbacks.push(obj);
-  elements.set(el, callbacks);
+  map.set(el, callbacks);
 
   const unobserve = () => {
 
@@ -45,7 +45,7 @@ export function io(el, enter, leave, once = false) {
 
     if (callbacks.length === 0) {
       instance.unobserve(el);
-      elements.delete(el);
+      map.delete(el);
     }
   };
 

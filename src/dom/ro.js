@@ -1,14 +1,14 @@
 import { isUndefined, isFunction } from '..';
 
 let instance;
-let elements;
+let map;
 
 function handleAll(entries) {
   entries.forEach(handleOne);
 }
 
 function handleOne(entry) {
-  elements.get(entry.target).forEach(fn => {
+  map.get(entry.target).forEach(fn => {
     isFunction(fn) && fn(entry);
   });
 }
@@ -17,16 +17,16 @@ export function ro(el, cb) {
 
   if (isUndefined(instance)) {
     instance = new ResizeObserver(handleAll);
-    elements = new Map();
+    map = new Map();
   }
 
-  if (!elements.has(el)) {
+  if (!map.has(el)) {
     instance.observe(el);
   }
 
-  const callbacks = elements.get(el) || [];
+  const callbacks = map.get(el) || [];
   callbacks.push(cb);
-  elements.set(el, callbacks);
+  map.set(el, callbacks);
 
   return () => {
 
@@ -35,7 +35,7 @@ export function ro(el, cb) {
 
     if (callbacks.length === 0) {
       instance.unobserve(el);
-      elements.delete(el);
+      map.delete(el);
     }
   }
 };
