@@ -1,3 +1,5 @@
+import { isBoolean, isString } from '..';
+
 export function toBoolean(value) {
 
   if (isBoolean(value)) {
