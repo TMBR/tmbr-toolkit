@@ -19,7 +19,7 @@ export function request(method, url, data, headers = {}) {
       res.text().then(body => {
         const data = JSON.parse(body || null);
         res.ok ? resolve(data) : reject({errors: data, status: res.status});
-      })
+      });
     });
   }
 
