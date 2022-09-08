@@ -37,6 +37,7 @@ export { createWorker } from './misc/createWorker';
 export { fill } from './misc/fill';
 export { noop } from './misc/noop';
 export { parse } from './misc/parse';
+export { pledge } from './misc/pledge';
 export { request } from './misc/request';
 export { slug } from './misc/slug';
 export { throttle } from './misc/throttle';
