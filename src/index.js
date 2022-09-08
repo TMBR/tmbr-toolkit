@@ -11,6 +11,7 @@ export { rect } from './dom/rect';
 export { ro } from './dom/ro';
 export { setProperty } from './dom/setProperty';
 export { svg } from './dom/svg';
+export { trap } from './dom/trap';
 export { walk } from './dom/walk';
 
 export { average } from './math/average';
