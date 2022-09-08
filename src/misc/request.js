@@ -1,5 +1,10 @@
 export function request(method, url, data, headers = {}) {
 
+  if (!methods.includes(method.toUpperCase())) {
+    const args = Array.from(arguments);
+    return request.get(...args);
+  }
+
   const config = {method};
   config.headers = Object.assign({'content-type': 'application/json'}, headers);
 
@@ -26,6 +31,14 @@ export function request(method, url, data, headers = {}) {
   return fetch(url, config).then(respond);
 };
 
-['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].forEach(method => {
+const methods = [
+  'GET',
+  'POST',
+  'PUT',
+  'PATCH',
+  'DELETE',
+];
+
+methods.forEach(method => {
   request[method.toLocaleLowerCase()] = (...args) => request(method, ...args);
 });
