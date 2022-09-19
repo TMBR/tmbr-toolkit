@@ -1,3 +1,5 @@
+import { toArray } from '..';
+
 /**
  * Get the index of the provided element
  *
@@ -5,5 +7,5 @@
  * @return {number}
  */
 export function indexOf(el) {
-  return Array.from(el.parentNode.children).indexOf(el);
+  return toArray(el.parentNode.children).indexOf(el);
 };

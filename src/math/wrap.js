@@ -11,7 +11,7 @@ import { isArray } from '..';
  * @param  {number} l Length
  * @return {number}   Looped index
  */
-export function wrap(i, l) {
-  isArray(l) && (l = l.length);
-  return i < 0 ? l + (i % l) : i >= l ? i % l : i;
+export function wrap(i, o) {
+  isArray(o) && (o = o.length);
+  return i < 0 ? o + (i % o) : i >= o ? i % o : i;
 };
