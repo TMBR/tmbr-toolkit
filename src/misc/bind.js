@@ -8,7 +8,12 @@ import { isFunction } from '..';
  * @param  {array}
  * @return {void}
  */
-export function bind(self) {
+export function bind(self, methods) {
+
+  if (methods) {
+    [].concat(methods).forEach(fn => isFunction(self[fn]) && (self[fn] = self[fn].bind(self)));
+    return self;
+  }
 
   const properties = new Set();
   let object = self.constructor.prototype;
@@ -23,13 +28,9 @@ export function bind(self) {
   } while ((object = Reflect.getPrototypeOf(object)) && object !== Object.prototype);
 
   for (const [object, key] of properties) {
-
     const descriptor = Reflect.getOwnPropertyDescriptor(object, key);
-
-    if (descriptor && isFunction(descriptor.value)) {
-      self[key] = self[key].bind(self);
-    }
+    if (descriptor && isFunction(descriptor.value)) self[key] = self[key].bind(self);
   }
 
   return self;
-}
+};
