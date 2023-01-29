@@ -1,8 +1,8 @@
-export function walk(node, callback) {
+export function traverse(node, callback) {
   callback(node);
   node = node.firstElementChild;
   while (node) {
-    walk(node, callback);
+    traverse(node, callback);
     node = node.nextElementSibling;
   }
 };

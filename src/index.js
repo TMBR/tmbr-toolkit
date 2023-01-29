@@ -13,7 +13,7 @@ export { ro } from './dom/ro';
 export { setProperty } from './dom/setProperty';
 export { svg } from './dom/svg';
 export { trap } from './dom/trap';
-export { walk } from './dom/walk';
+export { traverse } from './dom/traverse';
 
 export { average } from './math/average';
 export { brightness } from './math/brightness';
