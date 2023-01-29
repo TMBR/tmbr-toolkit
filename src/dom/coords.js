@@ -1,3 +1,5 @@
+import { isElement } from '..';
+
 export function coords(event, target) {
 
   const point = {
