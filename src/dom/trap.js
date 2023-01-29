@@ -1,21 +1,8 @@
-import { findAll, isFunction, wrap } from '..';
-
-const focusables = [
-  'a[href]',
-  'audio[controls]',
-  'video[controls]',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
-  'button:not([disabled])',
-  '[tabindex="0"]:not([disabled])',
-  '[contenteditable]',
-  'iframe'
-].join(', ');
+import { findAll, isFunction, wrap, focusables } from '..';
 
 export function trap(node, callback) {
 
-  let elements = findAll(focusables, node);
+  let elements = findAll(focusables.join(','), node);
   if (isFunction(callback)) elements = callback(elements);
 
   elements[0].focus();
