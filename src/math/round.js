@@ -6,6 +6,6 @@
  * @return {number}           rounded value
  */
 export function round(n, precision = 2) {
-  const d = Math.pow(10, precision);
+  const d = 10 ** precision;
   return Math.round(n * d) / d;
 };
