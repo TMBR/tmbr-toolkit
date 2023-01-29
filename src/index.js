@@ -47,6 +47,7 @@ export { wait } from './misc/wait';
 
 export { isArray } from './types/isArray';
 export { isBoolean } from './types/isBoolean';
+export { isClass } from './types/isClass';
 export { isDefined } from './types/isDefined';
 export { isElement } from './types/isElement';
 export { isEmpty } from './types/isEmpty';
