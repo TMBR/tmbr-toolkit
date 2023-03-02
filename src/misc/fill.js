@@ -1,6 +1,6 @@
 import { isFunction } from '..';
 
-export function fill(size, value) {
+export function fill(n, value) {
 	const fn = isFunction(value) ? (undef, i) => value(i) : () => value;
-	return [...Array(size)].map(fn);
+	return [...Array(n)].map(fn);
 };

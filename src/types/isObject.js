@@ -1,3 +1,6 @@
+import { isArray } from '..';
+
 export function isObject(value) {
-  return typeof value === 'object' && value !== null;
+  console.warn('@tmbr/utils: isObject will be changing to return false for arrays');
+  return typeof value === 'object' && value !== null; // && !isArray(value);
 };
