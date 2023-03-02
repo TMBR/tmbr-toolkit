@@ -1,8 +1,10 @@
 {
   "name": "@tmbr/utils",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "repository": "github:TMBR/tmbr-utils",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "main": "src/index.js",
   "type": "module",
   "sideEffects": false
