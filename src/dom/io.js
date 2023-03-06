@@ -13,9 +13,9 @@ function handleOne(entry) {
   });
 }
 
-export function io(el, enter, leave, once = false) {
+console.warn('@tmbr/utils: io function signature will be changing to io(el, {enter, leave, once}, ...rest)');
 
-  console.warn('@tmbr/utils: io function signature will be changing to io(el, {enter, leave, once}, ...rest)');
+export function io(el, enter, leave, once = false) {
 
   if (isUndefined(instance)) {
     instance = new IntersectionObserver(handleAll);
