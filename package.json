@@ -1,9 +1,16 @@
 {
-  "name": "@tmbr/utils",
-  "version": "1.8.4",
-  "repository": "github:TMBR/tmbr-utils",
-  "files": ["lib"],
-  "main": "index.js",
+  "name": "tmbr-toolkit",
   "type": "module",
-  "sideEffects": false
+  "private": true,
+  "scripts": {
+    "test:component": "node component/test.js",
+    "test:emitter": "node emitter/test.js",
+    "test:store": "node store/test.js",
+    "test:utils": "node utils.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^21.1.0",
+    "snoop": "^1.0.2",
+    "uvu": "^0.5.6"
+  }
 }
