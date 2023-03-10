@@ -1,3 +1,6 @@
+// TODO: remove this with 2.0 release
+export { setProperty } from './lib/prop.js';
+
 export { attr } from './lib/attr.js';
 export { average } from './lib/average.js';
 export { bind } from './lib/bind.js';
