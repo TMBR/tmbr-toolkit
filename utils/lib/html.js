@@ -20,8 +20,8 @@ export function html(strings, ...vars) {
   const content = template.content;
 
   [...content.querySelectorAll('[append]')].forEach((node, i) => {
-    node.parentNode.insertBefore(appends[i], node);
-    node.parentNode.removeChild(node);
+    node.before(appends[i]);
+    node.remove()
   });
 
   return content.childElementCount === 1 ? content.firstElementChild : content;
