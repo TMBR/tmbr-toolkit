@@ -1,5 +1,6 @@
 import EmblaCarousel from 'embla-carousel';
 import EmblaCarouselClassNames from 'embla-carousel-class-names';
+import { isString, isEmpty, findAll, findAll, attr, bind, fill, html } from '@tmbr/utils';
 
 class Carousel {
 
