@@ -1,3 +1,6 @@
+import EmblaCarousel from 'embla-carousel';
+import EmblaCarouselClassNames from 'embla-carousel-class-names';
+
 class Carousel {
 
   constructor(root, options, plugins = []) {
