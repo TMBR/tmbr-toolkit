@@ -1,14 +1,20 @@
+import { isElement } from './isElement.js';
 import { isObject } from './isObject.js';
+import { isString } from './isString.js';
+import { isArray } from './isArray.js';
 
-export function cx(node, ...classes) {
+export function cx(...args) {
 
-  if (!cx.warned) {
-    console.warn('@tmbr/utils: cx will be changing to return a npmjs.com/classnames style string if the first arg is not an element');
-    cx.warned = true;
-  }
+  const node = isElement(args[0]) ? args.shift() : null;
 
-  classes.reduce((res, val) => res.concat(isObject(val)
-    ? Object.keys(val).map(c => [c, val[c]])
-    : [[val, true]]
-  ), []).map(def => node.classList[def[1] ? 'add' : 'remove'](def[0]));
+  const classes = args.reduce((result, item) => {
+    if (isArray(item))  item = item.filter(Boolean).map(value => [value, true]);
+    if (isObject(item)) item = Object.entries(item);
+    if (isString(item)) item = [[item, true]];
+    return item ? result.concat(item) : result;
+  }, []);
+
+  return node
+    ? classes.forEach(([name, bool]) => node.classList[bool ? 'add' : 'remove'](name))
+    : classes.filter (([name, bool]) => bool).map(([name]) => name).join(' ');
 };
