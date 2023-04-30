@@ -1,5 +1,6 @@
-// TODO: remove this with 2.0 release
+// TODO: remove these with 2.0 release
 export { setProperty } from './lib/prop.js';
+export { toJSON as parse } from './lib/toJSON.js';
 
 export { attr } from './lib/attr.js';
 export { average } from './lib/average.js';
@@ -36,7 +37,6 @@ export { map } from './lib/map.js';
 export { noop } from './lib/noop.js';
 export { normalize } from './lib/normalize.js';
 export { on } from './lib/on.js';
-export { parse } from './lib/parse.js';
 export { PI, TWO_PI, HALF_PI  } from './lib/PI.js';
 export { pledge } from './lib/pledge.js';
 export { prop } from './lib/prop.js';
@@ -51,6 +51,7 @@ export { svg } from './lib/svg.js';
 export { throttle } from './lib/throttle.js';
 export { toArray } from './lib/toArray.js';
 export { toBoolean } from './lib/toBoolean.js';
+export { toJSON } from './lib/toJSON.js';
 export { toDegrees } from './lib/toDegrees.js';
 export { toRadians } from './lib/toRadians.js';
 export { toRGB } from './lib/toRGB.js';
