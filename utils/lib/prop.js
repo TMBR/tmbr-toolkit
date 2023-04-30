@@ -1,4 +1,4 @@
-import { isUndefined } from '..';
+import { isUndefined } from './isUndefined.js';
 
 // TODO: remove this with 2.0 release
 export function setProperty(target, name, value) {

@@ -1,7 +1,7 @@
 import { findAll } from './findAll.js';
+import { focusables } from './focusables.js';
 import { isFunction } from './isFunction.js';
 import { wrap } from './wrap.js';
-import { focusables } from './focusables.js';
 
 export function trap(node, callback) {
 
