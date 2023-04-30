@@ -36,15 +36,13 @@ test('cx', () => {
 });
 
 test('html', () => {
-
   const frag = new DocumentFragment();
   frag.append(html`<li>a</li>`);
   frag.append(html`<li>b</li><li>${div}</li>`);
 
   const list = html`<ul>${frag}</ul>`;
   assert.is(list.innerHTML, '<li>a</li><li>b</li><li><div></div></li>');
-  assert.is(list.children.length, 3);
-  assert.is(list.lastElementChild.children[0], div);
+  assert.is(list.children[2].firstElementChild, div);
 
   const button = html`<button type="button" class="button">Submit</button>`;
   assert.is(button.className, 'button');
