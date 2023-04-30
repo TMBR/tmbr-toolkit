@@ -3,13 +3,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test:component": "node component/test.js",
     "test:emitter": "node emitter/test.js",
     "test:store": "node store/test.js",
-    "test:utils": "node utils.test.js"
+    "test:utils": "node utils/test.js"
   },
   "devDependencies": {
-    "jsdom": "^21.1.0",
+    "jsdom": "^21.1.1",
     "snoop": "^1.0.2",
     "uvu": "^0.5.6"
   }
