@@ -1,9 +1,7 @@
 export function debounce(fn, delay) {
   let timeout;
-  return () => {
-    const self = this;
-    const args = arguments;
+  return (...args) => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => fn.apply(self, args), delay);
+    timeout = setTimeout(() => fn.apply(this, args), delay);
   };
 };
