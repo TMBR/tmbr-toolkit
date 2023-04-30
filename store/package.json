@@ -1,0 +1,5 @@
+{
+  "name": "@tmbr/store",
+  "type": "module",
+  "private": true
+}

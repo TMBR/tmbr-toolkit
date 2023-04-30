@@ -4,5 +4,9 @@
 node_modules
 
 !.gitignore
+!package.json
 !README.md
+!carousel/
+!emitter/
+!store/
 !utils/

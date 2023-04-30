@@ -1,0 +1,5 @@
+{
+  "name": "@tmbr/emitter",
+  "type": "module",
+  "private": true
+}
