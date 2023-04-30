@@ -1,8 +1,8 @@
 export function throttle(fn, limit) {
   let throttled;
-  return function() {
+  return function(...args) {
     if (!throttled) {
-      fn.apply(this, arguments);
+      fn.apply(this, args);
       throttled = true;
       setTimeout(() => throttled = false, limit);
     }
