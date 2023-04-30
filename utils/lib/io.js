@@ -1,3 +1,26 @@
+// TODO: use this with 2.0 release
+
+/* import { isFunction } from './isFunction.js';
+
+export function io(el, {enter, leave, once = false, ...rest}) {
+
+  const observer = new IntersectionObserver(([entry]) => {
+
+    if (entry.isIntersecting) {
+      isFunction(enter) && enter(entry);
+      once && unobserve();
+    } else {
+      isFunction(leave) && leave(entry);
+    }
+
+  }, rest);
+
+  observer.observe(el);
+
+  const unobserve = () => observer.disconnect();
+  return unobserve;
+}; */
+
 import { isFunction } from './isFunction.js';
 import { isUndefined } from './isUndefined.js';
 
