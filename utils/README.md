@@ -1,15 +1,5 @@
-# tmbr-utils
-
-A collection of small utility functions
+# utils
 
 ```bash
 npm install @tmbr/utils
 ```
-
-## dom
-
-## math
-
-## misc
-
-## types
