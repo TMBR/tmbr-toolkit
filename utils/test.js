@@ -68,6 +68,8 @@ test('toJSON', () => {
   assert.equal(o, toJSON());
   assert.equal(o, toJSON(0));
   assert.equal(o, toJSON(' '));
+  assert.equal(o, toJSON(' null '));
+  assert.equal(o, toJSON('undefined'));
   assert.equal(o, toJSON(null));
   assert.equal(o, toJSON(false));
   assert.equal(a, toJSON(undefined, a));

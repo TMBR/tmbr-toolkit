@@ -5,5 +5,5 @@ export function toJSON(string, defaults) {
   } catch (e) {
     result = {};
   }
-  return Object.assign(result, defaults);
+  return Object.assign(result || {}, defaults);
 };
