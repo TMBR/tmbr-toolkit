@@ -7,10 +7,10 @@ class Store {
   #initial;
   #state;
 
-  constructor(state = {}) {
+  constructor(initial = {}) {
     this.#emitter = new Emitter();
-    this.#initial = state;
-    this.#state = {...state};
+    this.#initial = {...initial};
+    this.#state = {...initial};
   }
 
   get(key) {
