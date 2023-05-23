@@ -1,6 +1,6 @@
 {
   "name": "@tmbr/utils",
-  "version": "1.8.8",
+  "version": "1.8.9",
   "repository": "github:TMBR/tmbr-toolkit",
   "browser": "index.js",
   "type": "module",
