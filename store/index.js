@@ -30,6 +30,7 @@ class Store {
         break;
 
       default:
+        if (this.#state[args[0]] === args[1]) return;
         this.#state[args[0]] = args[1];
         this.#emitter.emit(args[0], this.get());
         this.#emitter.emit('*', this.get());

@@ -87,6 +87,14 @@ test('subscribe to all state changes', () => {
   assert.is(callback.callCount, 2);
 });
 
+test('subscribe to multiple keys', () => {
+  const store = new Store({a: null, b: null});
+  const callback = snoop(() => {});
+  store.subscribe(['a', 'b'], callback.fn);
+  store.set({a: 'a', b: 'b'});
+  assert.is(callback.callCount, 2);
+});
+
 test('subscribe receives latest state', () => {
   const store = new Store({a: false});
   const callback = snoop(state => state);
@@ -97,12 +105,13 @@ test('subscribe receives latest state', () => {
   assert.ok(callback.firstCall.result.a);
 });
 
-test('subscribe to multiple keys', () => {
-  const store = new Store({a: null, b: null});
+test('subscribe only fires for changed values', () => {
+  const store = new Store({count: 0});
   const callback = snoop(() => {});
-  store.subscribe(['a', 'b'], callback.fn);
-  store.set({a: 'a', b: 'b'});
-  assert.is(callback.callCount, 2);
+  store.subscribe('count', callback.fn);
+  store.set('count', 43);
+  store.set('count', 43);
+  assert.ok(callback.calledOnce);
 });
 
 test('unsubscribe via key', () => {
