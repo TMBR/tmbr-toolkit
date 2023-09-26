@@ -16,8 +16,8 @@ export function io(el, {enter, leave, once = false, ...rest}) {
   }, rest);
 
   observer.observe(el);
-
   const unobserve = () => observer.disconnect();
+
   return unobserve;
 }; */
 

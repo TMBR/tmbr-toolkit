@@ -1,3 +1,4 @@
+// TODO: replace this with walk() in 2.0 release
 export function traverse(node, callback) {
   callback(node);
   node = node.firstElementChild;

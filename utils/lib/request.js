@@ -1,3 +1,15 @@
+const methods = [
+  'GET',
+  'POST',
+  'PUT',
+  'PATCH',
+  'DELETE',
+];
+
+methods.forEach(method => {
+  request[method.toLocaleLowerCase()] = (...args) => request(method, ...args);
+});
+
 export function request(method, url, data, headers = {}) {
 
   if (!methods.includes(method.toUpperCase())) {
@@ -30,15 +42,3 @@ export function request(method, url, data, headers = {}) {
 
   return fetch(url, config).then(respond);
 };
-
-const methods = [
-  'GET',
-  'POST',
-  'PUT',
-  'PATCH',
-  'DELETE',
-];
-
-methods.forEach(method => {
-  request[method.toLocaleLowerCase()] = (...args) => request(method, ...args);
-});
