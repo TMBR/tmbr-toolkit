@@ -1,5 +1,5 @@
-import Emitter from '../emitter/index.js';
-import { isFunction, toArray } from '../utils/index.js';
+import Emitter from '@tmbr/emitter';
+import { isFunction, toArray } from '@tmbr/utils';
 
 class Store {
 

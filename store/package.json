@@ -1,5 +1,14 @@
 {
   "name": "@tmbr/store",
+  "version": "1.0.0",
+  "repository": "github:TMBR/tmbr-toolkit",
   "type": "module",
-  "private": true
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "@tmbr/emitter": "^1.0.0",
+    "@tmbr/utils": "^1.8.9"
+  }
 }
