@@ -1,5 +1,8 @@
 {
   "name": "@tmbr/emitter",
+  "version": "0.0.1",
+  "repository": "github:TMBR/tmbr-toolkit",
   "type": "module",
-  "private": true
+  "main": "index.js",
+  "files": ["index.js"]
 }

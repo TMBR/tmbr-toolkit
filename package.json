@@ -2,6 +2,11 @@
   "name": "tmbr-toolkit",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "emitter",
+    "store",
+    "utils"
+  ],
   "scripts": {
     "test": "npm-run-all test:*",
     "test:emitter": "node emitter/test.js",
