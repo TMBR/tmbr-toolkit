@@ -1,9 +1,5 @@
-// TODO: replace this with walk() in 2.0 release
-export function traverse(node, callback) {
+export function traverse(node, callback, filter) {
+  const walker = document.createTreeWalker(node, filter || NodeFilter.SHOW_ELEMENT);
   callback(node);
-  node = node.firstElementChild;
-  while (node) {
-    traverse(node, callback);
-    node = node.nextElementSibling;
-  }
+  while (walker.nextNode()) callback(walker.currentNode);
 };

@@ -2,17 +2,12 @@ import { suite } from 'uvu';
 import { JSDOM } from 'jsdom';
 import * as assert from 'uvu/assert';
 
-// import * as fs from 'fs';
-// console.log(fs.readFileSync('index.html').toString());
-// fs.readdirSync('utils/lib').forEach(file => {
-//   file.startsWith('.') || console.log(file.slice(0, -3));
-// });
-
 import {
   cx,
   html,
   isObject,
   toJSON,
+  traverse
 } from './index.js';
 
 const test = suite('utils');
@@ -21,11 +16,12 @@ const { window } = new JSDOM();
 global.document = window.document;
 global.DocumentFragment = window.DocumentFragment;
 global.HTMLElement = window.HTMLElement;
+global.NodeFilter = window.NodeFilter;
 
 let div;
 
 test.before.each(() => {
-  div = window.document.createElement('div');
+  div = document.createElement('div');
 });
 
 test('cx', () => {
@@ -73,6 +69,31 @@ test('toJSON', () => {
   assert.equal(o, toJSON(null));
   assert.equal(o, toJSON(false));
   assert.equal(a, toJSON(undefined, a));
+});
+
+test('traverse', () => {
+
+  const div = html`
+    <div>
+      <header>
+        <h1>Hello</h1>
+      </header>
+      <main>
+        <p>Lorem ipsum dolor <strong>testing</strong></p>
+        <ul>
+          <li>Minnesota</li>
+          <li>Colorado</li>
+        </ul>
+      </main>
+    </div>`;
+
+  const tags = [];
+  traverse(div, el => tags.push(el.nodeName.toLowerCase()));
+  assert.equal(tags.join(' '), 'div header h1 main p strong ul li li');
+
+  const text = [];
+  traverse(div, el => text.push(el.wholeText?.trim()), NodeFilter.SHOW_TEXT);
+  assert.equal(text.filter(Boolean).join(' '), 'Hello Lorem ipsum dolor testing Minnesota Colorado');
 });
 
 test.run();
