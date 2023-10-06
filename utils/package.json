@@ -4,5 +4,8 @@
   "repository": "github:TMBR/tmbr-toolkit",
   "type": "module",
   "main": "index.js",
-  "files": ["index.js", "lib"]
+  "files": [
+    "index.js",
+    "lib"
+  ]
 }
