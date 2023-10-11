@@ -12,13 +12,17 @@ import {
 
 const test = suite('utils');
 
-const { window } = new JSDOM();
-global.document = window.document;
-global.DocumentFragment = window.DocumentFragment;
-global.HTMLElement = window.HTMLElement;
-global.NodeFilter = window.NodeFilter;
-
 let div;
+
+test.before(async () => {
+  const { window } = await JSDOM.fromFile('./utils/test.html');
+  await new Promise(resolve => window.addEventListener('load', resolve));
+  global.window = window;
+  global.document = window.document;
+  global.DocumentFragment = window.DocumentFragment;
+  global.HTMLElement = window.HTMLElement;
+  global.NodeFilter = window.NodeFilter;
+});
 
 test.before.each(() => {
   div = document.createElement('div');
@@ -72,27 +76,12 @@ test('toJSON', () => {
 });
 
 test('traverse', () => {
-
-  const div = html`
-    <div>
-      <header>
-        <h1>Hello</h1>
-      </header>
-      <main>
-        <p>Lorem ipsum dolor <strong>testing</strong></p>
-        <ul>
-          <li>Minnesota</li>
-          <li>Colorado</li>
-        </ul>
-      </main>
-    </div>`;
-
+  const node = document.getElementById('traverse');
   const tags = [];
-  traverse(div, el => tags.push(el.nodeName.toLowerCase()));
-  assert.equal(tags.join(' '), 'div header h1 main p strong ul li li');
-
   const text = [];
-  traverse(div, el => text.push(el.wholeText?.trim()), NodeFilter.SHOW_TEXT);
+  traverse(node, el => tags.push(el.nodeName.toLowerCase()));
+  traverse(node, el => text.push(el.wholeText?.trim()), NodeFilter.SHOW_TEXT);
+  assert.equal(tags.join(' '), 'div header h1 main p strong ul li li');
   assert.equal(text.filter(Boolean).join(' '), 'Hello Lorem ipsum dolor testing Minnesota Colorado');
 });
 

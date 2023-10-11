@@ -8,6 +8,7 @@ export { bind } from './lib/bind.js';
 export { brightness } from './lib/brightness.js';
 export { clamp } from './lib/clamp.js';
 export { coords } from './lib/coords.js';
+// TODO: remove for 2.0 in favor of a worker module?
 export { createWorker } from './lib/createWorker.js';
 export { cx } from './lib/cx.js';
 export { debounce } from './lib/debounce.js';
