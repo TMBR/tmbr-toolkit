@@ -36,12 +36,14 @@ test('get full state object', () => {
 test('state object returns a copy', () => {
   const state = {hello: 'world'};
   const store = new Store(state);
+  assert.is.not(store.state, state);
   assert.is.not(store.get(), state);
 });
 
-test('state object inaccessible from store instance', () => {
+test('state object only accessible via getter', () => {
   const store = new Store({foo: 'bar'});
-  assert.type(store.state, 'undefined');
+  assert.throws(() => store.state = {});
+  assert.equal(store.state, store.get());
 });
 
 test('state is immutable', () => {

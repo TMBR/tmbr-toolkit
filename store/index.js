@@ -13,6 +13,10 @@ class Store {
     this.#state = {...initial};
   }
 
+  get state() {
+    return this.get();
+  }
+
   get(key) {
     return key ? this.#state[key] : {...this.#state};
   }
