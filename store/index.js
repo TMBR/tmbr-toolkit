@@ -42,9 +42,10 @@ class Store {
     }
   }
 
-  subscribe(key, callback) {
-    if (isFunction(key)) return this.subscribe('*', key);
+  subscribe(key, callback, emit = false) {
+    if (isFunction(key)) return this.subscribe('*', key, !!callback);
     toArray(key).forEach(k => this.#emitter.on(k, callback));
+    emit && callback(this.get());
     return () => this.unsubscribe(key, callback);
   }
 

@@ -114,6 +114,12 @@ test('subscribe only fires for changed values', () => {
   assert.ok(callback.calledOnce);
 });
 
+test('subscribe with initial emit', () => {
+  (new Store({foo: 'bar'})).subscribe('foo', callback.fn, true);
+  (new Store).subscribe(callback.fn, true);
+  assert.is(callback.callCount, 2);
+});
+
 test('unsubscribe via key', () => {
   const store = new Store({status: 'idle'});
   store.subscribe('status', callback.fn);
