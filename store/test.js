@@ -20,13 +20,9 @@ test('create an instance with empty state', () => {
   assert.type(store.get(), 'object');
 });
 
-test('get single key from store instance', () => {
+test('get single key', () => {
   const store = new Store({key: 'value'});
   assert.is(store.get('key'), 'value');
-});
-
-test('get single key from state object', () => {
-  const store = new Store({key: 'value'});
   assert.is(store.get().key, 'value');
 });
 
