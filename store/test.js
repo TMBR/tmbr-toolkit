@@ -111,8 +111,9 @@ test('subscribe only fires for changed values', () => {
 });
 
 test('subscribe with initial emit', () => {
-  (new Store({foo: 'bar'})).subscribe('foo', callback.fn, true);
-  (new Store).subscribe(callback.fn, true);
+  const store = new Store({a: 'a', b: 'b'});
+  store.subscribe(callback.fn, true);
+  store.subscribe((['a','b']), callback.fn, true);
   assert.is(callback.callCount, 2);
 });
 
