@@ -8,7 +8,7 @@
     "utils"
   ],
   "scripts": {
-    "test": "npm-run-all test:*",
+    "test": "npm-run-all --silent test:*",
     "test:emitter": "node emitter/test.js",
     "test:store": "node store/test.js",
     "test:utils": "node utils/test.js"
