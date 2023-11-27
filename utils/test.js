@@ -1,11 +1,16 @@
 import { suite } from 'uvu';
 import { JSDOM } from 'jsdom';
+import { snoop } from 'snoop';
 import * as assert from 'uvu/assert';
 
 import {
   cx,
+  findAll,
+  findOne,
   html,
   isObject,
+  on,
+  noop,
   toJSON,
   traverse
 } from './index.js';
@@ -16,7 +21,6 @@ let div;
 
 test.before(async () => {
   const { window } = await JSDOM.fromFile('./utils/test.html');
-  await new Promise(resolve => window.addEventListener('load', resolve));
   global.window = window;
   global.document = window.document;
   global.DocumentFragment = window.DocumentFragment;
@@ -33,6 +37,7 @@ test('cx', () => {
   /********/ cx(div, 'one', {'two': true, 'three': 0}, [true && 'four', null && 'five']);
   assert.is(classes, 'one two four');
   assert.is(classes, div.className);
+  assert.is(cx(div), div.classList);
 });
 
 test('html', () => {
@@ -56,6 +61,41 @@ test('isObject', () => {
   assert.not.ok(isObject([]));
   assert.not.ok(isObject(null));
   assert.not.ok(isObject(fn => fn));
+});
+
+test('on', () => {
+
+  const [ a, b ] = findAll('#on button');
+
+  let callback = snoop(noop);
+  let off;
+
+  function trigger(el, event) {
+    el.dispatchEvent(new window.Event(event));
+  }
+
+  // on | off : event with selector
+  // on | off : event with element
+  // on | off : event with array
+  // on | off : multiple events with selector
+  // on | off : multiple events with element
+  // on | off : multiple events with array
+
+  off = on('click', '#on button', callback.fn);
+  // on('click', a, callback.fn);
+  // on('click', [a, b], callback.fn);
+  // on('mouseenter mouseleave', '#on button', callback.fn);
+  // on('mouseenter mouseleave', a, callback.fn);
+  // on('mouseenter mouseleave', [a, b], callback.fn);
+
+  trigger(a, 'click');
+  off();
+  trigger(a, 'click');
+  assert.equal(callback.firstCall.arguments[0].target, a);
+  assert.ok(callback.calledOnce);
+
+  // b1.dispatchEvent(new window.Event('mouseenter'));
+  // assert.equal(callback.calls[1].arguments[0].target, b1);
 });
 
 test('toJSON', () => {
