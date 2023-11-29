@@ -3,8 +3,8 @@ import { isElement } from './isElement.js';
 export function coords(event, target) {
 
   const point = {
-    x: event.touches ? event.touches[0].pageX : event.clientX,
-    y: event.touches ? event.touches[0].pageY : event.clientY
+    x: event.touches?.[0].pageX || event.clientX,
+    y: event.touches?.[0].pageY || event.clientY
   };
 
   if (isElement(target)) {
