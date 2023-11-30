@@ -18,4 +18,4 @@ export const focusables = [
   `video[controls]${not.inert}${not.tabindex}`,
   `[contenteditable]${not.inert}${not.tabindex}`,
   `[tabindex]${not.inert}${not.tabindex}`,
-]
+];
