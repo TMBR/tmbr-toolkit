@@ -22,19 +22,16 @@ let div;
 test.before(async () => {
   const { window } = await JSDOM.fromFile('./utils/test.html');
   global.window = window;
-  global.document = window.document;
-  global.DocumentFragment = window.DocumentFragment;
-  global.HTMLElement = window.HTMLElement;
-  global.NodeFilter = window.NodeFilter;
+  Object.entries(window).forEach(([key, obj]) => global[key] = obj);
 });
 
 test.before.each(() => {
   div = document.createElement('div');
 });
 
-test('cx', () => {
+test('cx', ctx => {
   const classes = cx('one', {'two': true, 'three': 0}, [true && 'four', null && 'five']);
-  /********/ cx(div, 'one', {'two': true, 'three': 0}, [true && 'four', null && 'five']);
+  /*      */ cx(div, 'one', {'two': true, 'three': 0}, [true && 'four', null && 'five']);
   assert.is(classes, 'one two four');
   assert.is(classes, div.className);
   assert.is(cx(div), div.classList);

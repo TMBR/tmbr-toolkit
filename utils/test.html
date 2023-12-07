@@ -1,22 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@tmbr/utils</title>
 </head>
 <body>
 
-<div id="traverse">
-    <header>
-        <h1>Hello</h1>
-    </header>
-    <main>
-        <p>Lorem ipsum dolor <strong>testing</strong></p>
-        <ul>
-            <li>Minnesota</li>
-            <li>Colorado</li>
-        </ul>
-    </main>
-</div>
+    <div id="traverse">
+
+        <header>
+            <h1>Hello</h1>
+        </header>
+
+        <main>
+            <p>Lorem ipsum dolor <strong>testing</strong></p>
+            <ul>
+                <li>Minnesota</li>
+                <li>Colorado</li>
+            </ul>
+        </main>
+
+    </div>
+
+    <div id="on">
+        <button type="button" class="button">a</button>
+        <button type="button" class="button">b</button>
+    </div>
+
+<script type="module">
+import { on } from './lib/on.js';
+
+// 1. on | off : event with selector
+// 2. on | off : event with selector and scope
+// 3. on | off : event with element
+// 4. on | off : event with array
+// 5. on | off : multiple events with selector
+// 6. on | off : multiple events with selector and scope
+// 7. on | off : multiple events with element
+// 8. on | off : multiple events with array
+
+const div = document.getElementById('on');
+const buttons = [...div.querySelectorAll('button')];
+const a = buttons[0];
+
+let off;
+
+// off = on('click', '.button', e => console.log(e.target.matches('.button')));
+// off = on('click', '.button', e => console.log(e.currentTarget), div);
+// off = on('click', a, e => console.log(e.type, e.target === a));
+// off = on('click', buttons, e => console.log(buttons.includes(event.target)));
+// off = on('click mouseenter', '.button', e => console.log(e.target.matches('.button')));
+// off = on('click mouseenter', '.button', e => console.log(e.currentTarget), div);
+// off = on('click mouseenter', a, e => console.log(e.type, e.target === a));
+// off = on('click mouseenter', buttons, e => console.log(e.target.matches('.button')));
+
+off && setTimeout(() => (console.log('off'), off()), 5000);
+
+</script>
 
 </body>
 </html>
