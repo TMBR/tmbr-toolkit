@@ -29,6 +29,15 @@ test('emit an event with data', () => {
   assert.equal(func.firstCall.result, data);
 });
 
+test('unsubscribe via return function', () => {
+  const func = snoop(noop);
+  const off = events.on('test', func.fn);
+  events.emit('test');
+  off();
+  events.emit('test');
+  assert.ok(func.calledOnce);
+});
+
 test('unsubscribe from an event', () => {
   const func = snoop(noop);
   events.on('test', func.fn);

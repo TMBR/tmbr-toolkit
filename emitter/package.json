@@ -1,6 +1,6 @@
 {
   "name": "@tmbr/emitter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": "github:TMBR/tmbr-toolkit",
   "type": "module",
   "main": "index.js",
