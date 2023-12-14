@@ -21,8 +21,14 @@ let div;
 
 test.before(async () => {
   const { window } = await JSDOM.fromFile('./utils/test.html');
-  global.window = window;
-  Object.entries(window).forEach(([key, obj]) => global[key] = obj);
+
+  global.window = window; [
+    'document',
+    'DocumentFragment',
+    'HTMLElement',
+    'NodeFilter',
+    'AbortController'
+  ].forEach(key => global[key] = window[key]);
 });
 
 test.before.each(() => {
