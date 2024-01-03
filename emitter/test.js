@@ -4,8 +4,12 @@ import { snoop } from 'snoop';
 import Emitter from './index.js';
 
 const test = suite('emitter');
-const events = new Emitter();
 const noop = o => o;
+let events;
+
+test.before.each(() => {
+  events = new Emitter();
+});
 
 test('subscribe to an event', () => {
   const func = snoop(noop);
@@ -45,6 +49,11 @@ test('unsubscribe from an event', () => {
   events.off('test', func.fn);
   events.emit('test');
   assert.ok(func.calledOnce);
+});
+
+test('unsubscribe and emit fail silently', () => {
+  events.off('foo', noop);
+  events.emit('bar', noop);
 });
 
 test('check if an event has a callback', () => {

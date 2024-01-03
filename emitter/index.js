@@ -9,18 +9,16 @@ class Emitter {
   }
 
   off(type, callback) {
-    const map = this.#events[type];
-    map && map.delete(callback);
-  }
-
-  emit(type, data) {
-    if (this.#events === null) return;
-    const map = this.#events[type];
-    map && map.forEach((context, callback) => callback.call(context, data));
+    this.#events[type]?.delete(callback);
   }
 
   has(type) {
     return this.#events.hasOwnProperty(type) && this.#events[type].size > 0;
+  }
+
+  emit(type, data) {
+    if (this.#events === null) return;
+    this.#events[type]?.forEach((context, callback) => callback.call(context, data));
   }
 
   destroy() {
