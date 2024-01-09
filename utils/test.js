@@ -11,6 +11,7 @@ import {
   isObject,
   on,
   noop,
+  pipe,
   toJSON,
   traverse
 } from './index.js';
@@ -106,6 +107,15 @@ test('on', () => {
 
   assert.equal(callback.firstCall.arguments[0].target, a);
   assert.ok(callback.calledOnce);
+});
+
+test('pipe', () => {
+  const fn = pipe(
+    value => value.replace(/[^a-zA-Z]/g, ''),
+    value => value.toUpperCase(),
+    value => `${value}!`
+  );
+  assert.equal(fn('Hello, World?'), 'HELLOWORLD!');
 });
 
 test('toJSON', () => {
