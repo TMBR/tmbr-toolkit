@@ -4,9 +4,9 @@ import { snoop } from 'snoop';
 import * as assert from 'uvu/assert';
 
 import {
+  combine,
   cx,
   findAll,
-  findOne,
   html,
   isObject,
   on,
@@ -33,6 +33,15 @@ test.before(async () => {
 
 test.before.each(() => {
   div = document.createElement('div');
+});
+
+test('combine', ctx => {
+  const b = snoop(noop);
+  const a = snoop(noop);
+  const combined = combine(a.fn, undefined, null, 0, b.fn);
+  combined('foo', 'bar');
+  assert.equal(a.calls[0].arguments, ['foo', 'bar']);
+  assert.equal(b.calls[0].arguments, ['foo', 'bar']);
 });
 
 test('cx', ctx => {
@@ -94,11 +103,9 @@ test('on', () => {
   trigger(a, 'click');
   off();
   trigger(a, 'click');
+
   assert.equal(callback.firstCall.arguments[0].target, a);
   assert.ok(callback.calledOnce);
-
-  // b1.dispatchEvent(new window.Event('mouseenter'));
-  // assert.equal(callback.calls[1].arguments[0].target, b1);
 });
 
 test('toJSON', () => {
