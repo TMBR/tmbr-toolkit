@@ -70,17 +70,32 @@ test('set via function with current state', () => {
   assert.equal(store.get(), {count: 42});
 });
 
+test('subscribe callback immediately invoked with current state', () => {
+  const store = new Store({a: 'a', b: 'b'});
+  store.subscribe(callback.fn);
+  store.subscribe(['a','b'], callback.fn);
+  assert.is(callback.callCount, 2);
+  assert.is(callback.calls[0].arguments[0].a, 'a');
+  assert.is(callback.calls[1].arguments[0].b, 'b');
+});
+
+test('subscribe without immediate callback', () => {
+  const store = new Store({a: 'a', b: 'b'});
+  store.subscribe(callback.fn, false);
+  store.subscribe(['a','b'], callback.fn, false);
+  assert.ok(callback.notCalled);
+});
+
 test('subscribe to state changes by key', () => {
   const store = new Store({toggle: false});
   store.subscribe('toggle', callback.fn);
   store.set(state => ({toggle: !state.toggle}));
-  assert.ok(callback.calledOnce);
   assert.ok(store.get('toggle'));
 });
 
 test('subscribe to all state changes', () => {
   const store = new Store({a: null, b: null});
-  store.subscribe(callback.fn);
+  store.subscribe(callback.fn, false);
   store.set({a: 'foo'});
   store.set({b: 'bar'});
   assert.is(callback.callCount, 2);
@@ -88,14 +103,14 @@ test('subscribe to all state changes', () => {
 
 test('subscribe to multiple keys', () => {
   const store = new Store({a: null, b: null});
-  store.subscribe(['a', 'b'], callback.fn);
+  store.subscribe(['a', 'b'], callback.fn, false);
   store.set({a: 'a', b: 'b'});
   assert.is(callback.callCount, 2);
 });
 
 test('subscribe receives latest state', () => {
   const store = new Store({a: false});
-  store.subscribe('a', callback.fn);
+  store.subscribe('a', callback.fn, false);
   store.set('a', true);
   store.set('b', 'should not trigger callback');
   assert.ok(callback.calledOnce);
@@ -104,22 +119,15 @@ test('subscribe receives latest state', () => {
 
 test('subscribe only fires for changed values', () => {
   const store = new Store({count: 0});
-  store.subscribe('count', callback.fn);
+  store.subscribe('count', callback.fn, false);
   store.set('count', 43);
   store.set('count', 43);
   assert.ok(callback.calledOnce);
 });
 
-test('subscribe with initial emit', () => {
-  const store = new Store({a: 'a', b: 'b'});
-  store.subscribe(callback.fn, true);
-  store.subscribe((['a','b']), callback.fn, true);
-  assert.is(callback.callCount, 2);
-});
-
 test('unsubscribe via key', () => {
   const store = new Store({status: 'idle'});
-  store.subscribe('status', callback.fn);
+  store.subscribe('status', callback.fn, false);
   store.set('status', 'loading');
   store.unsubscribe('status', callback.fn);
   store.set('status', 'complete');
@@ -128,7 +136,7 @@ test('unsubscribe via key', () => {
 
 test('unsubscribe via returned function', () => {
   const store = new Store({key: 'a'});
-  const unsubscribe = store.subscribe('key', callback.fn);
+  const unsubscribe = store.subscribe('key', callback.fn, false);
   store.set('key', 'b');
   unsubscribe();
   store.set('key', 'c');
