@@ -1,4 +1,4 @@
-import { isEmpty } from './isEmpty.js';
+import { isNumber } from './isNumber.js';
 
 export function cookie(name, value, expires) {
 
@@ -6,19 +6,16 @@ export function cookie(name, value, expires) {
     return document.cookie.split('; ').find(pair => pair.startsWith(`${name}=`))?.split('=')[1];
   }
 
-  if (arguments.length === 2 && isEmpty(value)) {
-    document.cookie = `${name}=; max-age=0; path=/`;
+  if (value === null) {
+    document.cookie = `${name}=; max-age=0`;
     return;
   }
 
-  switch (typeof expires) {
-    case 'string': expires = new Date(expires); break;
-    case 'number': expires = new Date( + new Date + 1000 * 60 * 60 * 24 * expires); break;
+  if (isNumber(expires)) {
+    expires = new Date( + new Date + 1000 * 60 * 60 * 24 * expires);
   }
 
-  if ('toUTCString' in expires) {
-    expires = expires.toUTCString();
-  }
-
-  document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
+  document.cookie = expires?.toUTCString
+    ? `${name}=${value}; expires=${expires.toUTCString()}`
+    : `${name}=${value}`;
 };
