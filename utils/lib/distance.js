@@ -2,8 +2,9 @@ import { isUndefined } from './isUndefined.js';
 
 /**
  * Calculates the distance between two points
- * @param  {mixed} x1  x coordinate or object with x and y properties
- * @param  {mixed} y1  y coordinate or object with x and y properties
+ *
+ * @param  {mixed}  x1  x coordinate or object with x and y properties
+ * @param  {mixed}  y1  y coordinate or object with x and y properties
  * @param  {number} x2 optional, x coordinate of the second point
  * @param  {number} y2 optional, y coordinate of the second point
  * @return {number} distance

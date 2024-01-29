@@ -1,7 +1,7 @@
 /**
  * Calculates brightness from an rgb array
  *
- * @param  {array}  color array of red, green and blue values in the range 0-255
+ * @param  {array}  color - array of red, green and blue values in the range 0-255
  * @return {number} brightness value between 0-255
  */
 export function brightness(rgb) {

@@ -1,12 +1,12 @@
 import { isFunction } from './isFunction.js';
 
 /**
- * Bind functions to a context or class instance
- * https://www.npmjs.com/package/auto-bind
+ * Bind functions to a context or class instance, including getters and setters
+ * (based on {@link https://www.npmjs.com/package/auto-bind auto-bind}).
  *
- * @param  {object}
- * @param  {array}
- * @return {void}
+ * @param  {object} self    - target instance to be `this`
+ * @param  {array}  methods - array of functions or class methods
+ * @return {object} target instance for chaining
  */
 export function bind(self, methods) {
 
