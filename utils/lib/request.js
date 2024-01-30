@@ -10,25 +10,24 @@ methods.forEach(method => {
   request[method.toLocaleLowerCase()] = (...args) => request(method, ...args);
 });
 
-export function request(method, url, data, headers = {}) {
+request.headers = {
+  'content-type': 'application/json'
+};
 
-  if (!methods.includes(method.toUpperCase())) {
-    const args = Array.from(arguments);
-    return request.get(...args);
-  }
+export function request(method, url, data, options = {}) {
 
-  const config = {method};
-  config.headers = Object.assign({'content-type': 'application/json'}, headers);
+  options.method = method;
+  options.headers = Object.assign(request.headers, options.headers);
 
   if ( ! url.startsWith('http')) {
     url = `/${url.startsWith('/') ? url.slice(1) : url}`;
   }
 
   if (method.toUpperCase() === 'GET') {
-    const params = new URLSearchParams(data).toString();
-    params && (url += `${url.includes('&') ? '&' : '?'}${params}`);
+    const params = new URLSearchParams(data || '').toString();
+    params && (url += `${url.includes('?') ? '&' : '?'}${params}`);
   } else {
-    config.body = JSON.stringify(data || {});
+    options.body = JSON.stringify(data || {});
   }
 
   function respond(res) {
@@ -40,5 +39,5 @@ export function request(method, url, data, headers = {}) {
     });
   }
 
-  return fetch(url, config).then(respond);
+  return fetch(url, options).then(respond);
 };

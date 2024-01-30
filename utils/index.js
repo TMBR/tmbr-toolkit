@@ -1,7 +1,3 @@
-// TODO: remove these with 2.0 release
-export { setProperty } from './lib/prop.js';
-export { toJSON as parse } from './lib/toJSON.js';
-
 export { attr } from './lib/attr.js';
 export { average } from './lib/average.js';
 export { bind } from './lib/bind.js';
@@ -10,8 +6,6 @@ export { clamp } from './lib/clamp.js';
 export { combine } from './lib/combine.js';
 export { cookie } from './lib/cookie.js';
 export { coords } from './lib/coords.js';
-// TODO: remove for 2.0 in favor of a worker module?
-export { createWorker } from './lib/createWorker.js';
 export { cx } from './lib/cx.js';
 export { debounce } from './lib/debounce.js';
 export { distance } from './lib/distance.js';
@@ -64,4 +58,5 @@ export { trap } from './lib/trap.js';
 export { traverse } from './lib/traverse.js';
 export { uid } from './lib/uid.js';
 export { wait } from './lib/wait.js';
+export { worker } from './lib/worker.js';
 export { wrap } from './lib/wrap.js';
