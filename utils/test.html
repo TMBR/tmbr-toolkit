@@ -29,7 +29,12 @@
     </div>
 
 <script type="module">
-import { on } from './lib/on.js';
+// import { on } from './lib/on.js';
+import { io } from './lib/io.js';
+import { once } from './lib/once.js';
+import { request } from './lib/request.js';
+import { cookie } from './lib/cookie.js';
+import { worker } from './lib/worker.js';
 
 // 1. on | off : event with selector
 // 2. on | off : event with selector and scope
@@ -46,6 +51,10 @@ const a = buttons[0];
 
 let off;
 
+// off = once('click ', '.button', e => console.log(e.target.matches('.button')));
+// off = once('click ', '.button', e => console.log(e.currentTarget), div);
+// off = once('click', a, e => console.log(e.type, e.target === a));
+// off = once('click', buttons, e => console.log(buttons.includes(event.target)));
 // off = on('click', '.button', e => console.log(e.target.matches('.button')));
 // off = on('click', '.button', e => console.log(e.currentTarget), div);
 // off = on('click', a, e => console.log(e.type, e.target === a));
@@ -56,6 +65,71 @@ let off;
 // off = on('click mouseenter', buttons, e => console.log(e.target.matches('.button')));
 
 off && setTimeout(() => (console.log('off'), off()), 5000);
+
+
+
+// <div style="height:1000px;width:100px;background:red;margin:30px auto"></div>
+// <div id="io" style="height:100px;width:100px;background:green;margin:30px auto"></div>
+// <div style="height:1000px;width:100px;background:red;margin:30px auto"></div>
+// const unobserve = io(document.getElementById('io'), {
+//     enter: () => console.log('enter'),
+//     leave: () => console.log('leave'),
+//     once: false,
+//     rootMargin: '30px'
+// });
+// setTimeout(unobserve, 5000);
+
+
+
+// const controller = new AbortController();
+// const signal = controller.signal;
+// setTimeout(() => controller.abort(), 2000);
+
+// request.get('https://reqres.in/api/users?page=2&v=123', {delay: 4}, {signal}).then(
+//     res => console.log(res),
+//     err => console.log(err)
+// );
+
+// request.headers['X-Message'] = 'Hello';
+// request.get('https://jsonplaceholder.typicode.com/users', null).then(console.log);
+// request('GET', 'https://jsonplaceholder.typicode.com/users').then(console.log);
+
+// setTimeout(() => console.log(cookie('name')), 1000);
+// setTimeout(() => cookie.delete('name'), 2000);
+// setTimeout(() => cookie('name', 'Angel'), 3000);
+// setTimeout(() => console.log(cookie('name')), 4000);
+
+
+
+// console.log('before worker');
+// const instance = worker(/* js */`
+//   // comments work in worker code
+//   console.log('in worker');
+//   function calculate(n) {
+//     let value = 0;
+//     for (var i = 0; i < 1_000_000_000; i++) value += Math.pow(i, n);
+//     return n;
+//   }
+//   self.onmessage = function(e) {
+//     self.postMessage(calculate(e.data));
+//   };
+// `);
+// const instance = worker(function() {
+//   // comments work in worker code
+//   console.log('in worker');
+//   function calculate(n) {
+//     let value = 0;
+//     for (var i = 0; i < 1_000_000_000; i++) value += Math.pow(i, n);
+//     return value;
+//   }
+//   self.onmessage = function(e) {
+//     self.postMessage(calculate(e.data));
+//   };
+// });
+// console.log('after worker');
+// instance.onmessage = e => console.log('got it!', e.data);
+// instance.postMessage(1000);
+
 
 </script>
 
