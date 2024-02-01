@@ -11,8 +11,15 @@ methods.forEach(method => {
 });
 
 request.headers = {
-  'content-type': 'application/json'
+  'Content-Type': 'application/json'
 };
+
+request.handler = res => new Promise((resolve, reject) => {
+  res.text().then(body => {
+    const data = JSON.parse(body || null);
+    res.ok ? resolve(data) : reject({errors: data, status: res.status});
+  });
+});
 
 export function request(method, url, data, options = {}) {
 
@@ -30,14 +37,5 @@ export function request(method, url, data, options = {}) {
     options.body = JSON.stringify(data || {});
   }
 
-  function respond(res) {
-    return new Promise((resolve, reject) => {
-      res.text().then(body => {
-        const data = JSON.parse(body || null);
-        res.ok ? resolve(data) : reject({errors: data, status: res.status});
-      });
-    });
-  }
-
-  return fetch(url, options).then(respond);
+  return fetch(url, options).then(request.handler);
 };
