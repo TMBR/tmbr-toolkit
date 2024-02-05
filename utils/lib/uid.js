@@ -1,3 +1,6 @@
+/**
+ * Generates a unique base 16 string with an optional prefix or suffix.
+ */
 function now() {
   const time = Date.now();
   const last = now.last || time;

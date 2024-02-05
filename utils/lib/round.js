@@ -1,9 +1,10 @@
 /**
- * Rounds a value to the specificed number of decimal places.
+ * Rounds a value to the specificed number of decimal places
  *
- * @param  {number} n         number to round
- * @param  {number} precision decimal places
- * @return {number}           rounded value
+ * @param n         - number to round
+ * @param precision - decimal places
+ *
+ * @return rounded value
  */
 export function round(n, precision = 2) {
   const d = 10 ** precision;

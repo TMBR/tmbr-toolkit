@@ -3,6 +3,10 @@ import { isObject } from './isObject.js';
 import { isString } from './isString.js';
 import { isArray } from './isArray.js';
 
+/**
+ * Conditionally toggles classes on an element or generates a string of classes,
+ * similar to {@link https://www.npmjs.com/package/classnames classnames})
+ */
 export function cx(...args) {
 
   const node = isElement(args[0]) ? args.shift() : null;

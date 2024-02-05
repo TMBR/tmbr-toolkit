@@ -1,11 +1,12 @@
 /**
- * Multi-purpose random function. If no arguments are passed, return
- * a random float 0-1 (via Math.random()). If an array is passed,
- * return a random element from the array. If min, or min and max are
- * passed, return a random float within that range.
- * @param  {number} min   low end of range
- * @param  {number} max   high end of range
- * @return {mixed}        random number within range or random element from array
+ * Multi-purpose random function:
+ *
+ * - if no arguments are passed, returns random float 0-1 from {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random Math.random()}
+ * - if an array is passed, returns a random element from the array
+ * - if min is passed, returns a random float in the range 0-min
+ * - if min and max are passed, returns a random float in the range min-max
+
+ * @return random number or random element from array
  */
 export function random(min, max) {
 

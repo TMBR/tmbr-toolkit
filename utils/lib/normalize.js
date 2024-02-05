@@ -1,10 +1,11 @@
 /**
- * Normalize a value between two bounds
+ * Normalizes a value between two bounds
  *
- * @param  {number} value Value to normalize
- * @param  {number} min   Minimum boundary
- * @param  {number} max   Maximum boundary
- * @return {number}       Normalized value
+ * @param {number} value - value to normalize
+ * @param {number} min   - minimum boundary
+ * @param {number} max   - maximum boundary
+ *
+ * @return {number} normalized value
  */
 export function normalize(value, min, max) {
   return (value - min) / (max - min);
