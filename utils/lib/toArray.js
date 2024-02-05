@@ -1,3 +1,6 @@
+/**
+ * Converts a value to an array
+ */
 export function toArray(value) {
   return (
     value instanceof NodeList ||

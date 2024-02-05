@@ -1,5 +1,5 @@
 /**
- * Linear interpolation (lerp)
+ * Performs linear interpolation between two values
  *
  * @param  {number} a current value
  * @param  {number} b target value

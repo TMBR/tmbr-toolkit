@@ -1,3 +1,11 @@
+/**
+ * Creates DOM elements using template literals
+ * (based on {@link https://www.npmjs.com/package/facon facon}))
+ *
+ * @example
+ * const img = html`<img src="https://placehold.co/600x400" alt="">`;
+ * const div = html`<div>${img}</div>`;
+ */
 export function html(strings, ...vars) {
 
   let result = '';

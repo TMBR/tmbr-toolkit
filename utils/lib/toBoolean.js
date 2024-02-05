@@ -1,6 +1,9 @@
 import { isBoolean } from './isBoolean.js';
 import { isString } from './isString.js';
 
+/**
+ * Converts a value to `true` or `false`
+ */
 export function toBoolean(value) {
 
   if (isBoolean(value)) {

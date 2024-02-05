@@ -4,6 +4,10 @@ const not = {
   disabled: ':not(:disabled)',
 };
 
+/**
+ * Exports an array of CSS selectors for elements that can receive focus
+ * (based on {@link https://github.com/KittyGiraudel/focusable-selectors focusable-selectors})
+ */
 export const focusables = [
   `a[href]${not.inert}${not.tabindex}`,
   `area[href]${not.inert}${not.tabindex}`,

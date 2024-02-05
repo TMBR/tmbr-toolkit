@@ -1,5 +1,14 @@
 import { isElement } from './isElement.js';
 
+/**
+ * Gets the x and y coordinates of a touch or click event,
+ * optionally relative to a target element
+ *
+ * @param event  - event object
+ * @param target - optional target element
+ *
+ * @return object with x and y properties
+ */
 export function coords(event, target) {
 
   const point = {

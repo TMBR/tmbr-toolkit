@@ -1,5 +1,15 @@
 import { isString } from './isString.js';
 
+/**
+ * Adds an event listener to a target element or array of elements, or creates a delegate listener for the target selector string
+ *
+ * @param event    - name of event (or multiple events separated by spaces)
+ * @param target   - target element, array of elements or a CSS selector for event delegation
+ * @param callback - callback function
+ * @param scope    - optional parent scope
+ *
+ * @returns function to remove all listeners
+ */
 export function on(type, target, callback, scope = document) {
 
   const controller = new AbortController();

@@ -1,9 +1,10 @@
 import { toArray } from './toArray.js';
 
 /**
- * Get the index of the provided element
+ * Gets the child index of the provided element
  *
  * @param {HTMLElement}
+ *
  * @return {number}
  */
 export function indexOf(el) {

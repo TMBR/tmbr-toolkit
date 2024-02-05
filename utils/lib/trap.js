@@ -3,6 +3,11 @@ import { focusables } from './focusables.js';
 import { isFunction } from './isFunction.js';
 import { wrap } from './wrap.js';
 
+/**
+ * Traps focus on the given element with an optional callback to modify the array of [focusable](#focusables) elements
+ *
+ * @return function to untrap
+ */
 export function trap(node, callback) {
 
   let elements = findAll(focusables.join(','), node);
