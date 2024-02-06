@@ -10,6 +10,8 @@ import { wrap } from './wrap.js';
  */
 export function trap(node, callback) {
 
+  const previous = document.activeElement;
+
   let elements = findAll(focusables.join(','), node);
   if (isFunction(callback)) elements = callback(elements);
 
@@ -24,5 +26,9 @@ export function trap(node, callback) {
   }
 
   window.addEventListener('keydown', keydown);
-  return () => window.removeEventListener('keydown', keydown);
+
+  return () => {
+    window.removeEventListener('keydown', keydown);
+    previous?.focus();
+  };
 };

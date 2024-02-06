@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@tmbr/utils</title>
+    <style>
+    :focus { outline: 1px solid currentColor }
+    </style>
 </head>
 <body>
 
@@ -28,6 +31,16 @@
         <button type="button" class="button">b</button>
     </div>
 
+    <div id="trap">
+        <button type="button">Menu</button>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <input type="search" placeholder="Search" />
+        </nav>
+    </div>
+
 <script type="module">
 // import { on } from './lib/on.js';
 import { io } from './lib/io.js';
@@ -35,6 +48,7 @@ import { once } from './lib/once.js';
 import { request } from './lib/request.js';
 import { cookie } from './lib/cookie.js';
 import { worker } from './lib/worker.js';
+import { trap } from './lib/trap.js';
 
 // 1. on | off : event with selector
 // 2. on | off : event with selector and scope
@@ -129,6 +143,24 @@ off && setTimeout(() => (console.log('off'), off()), 5000);
 // console.log('after worker');
 // instance.onmessage = e => console.log('got it!', e.data);
 // instance.postMessage(1000);
+
+
+const el = document.getElementById('trap');
+const btn = el.querySelector('button');
+const nav = el.querySelector('nav');
+let untrap;
+console.log(btn, nav);
+
+document.addEventListener('keyup', event => {
+    event.key === 'Escape' && untrap?.();
+});
+
+btn.addEventListener('click', event => {
+    untrap = trap(nav, elements => {
+        elements.push(btn);
+        return elements;
+    });
+})
 
 
 </script>
