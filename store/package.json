@@ -9,6 +9,6 @@
   ],
   "dependencies": {
     "@tmbr/emitter": "^1.0.0",
-    "@tmbr/utils": "^1.8.9"
+    "@tmbr/utils": "^2.0.0"
   }
 }
