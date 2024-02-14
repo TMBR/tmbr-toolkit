@@ -22,7 +22,7 @@ export function cookie(name, value, expires) {
   }
 
   if (value === null) {
-    document.cookie = `${name}=; max-age=0`;
+    document.cookie = `${name}=; path=/; max-age=0`;
     return;
   }
 
@@ -31,6 +31,6 @@ export function cookie(name, value, expires) {
   }
 
   document.cookie = expires?.toUTCString
-    ? `${name}=${value}; expires=${expires.toUTCString()}`
-    : `${name}=${value}`;
+    ? `${name}=${value}; path=/; expires=${expires.toUTCString()}`
+    : `${name}=${value}; path=/`;
 };
