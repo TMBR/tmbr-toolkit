@@ -57,6 +57,7 @@ Breaking changes introduced in version `2.0.0`:
 *   [map](#map)
 *   [noop](#noop)
 *   [normalize](#normalize)
+*   [observable](#observable)
 *   [on](#on)
 *   [once](#once)
 *   [PI](#pi)
@@ -441,6 +442,30 @@ Normalizes a value between two bounds
 *   `max` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** maximum boundary
 
 Returns **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** normalized value
+
+### observable
+
+Creates a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/Proxy)
+instance with a `subscribe` method that can be used to respond to state changes
+
+#### Parameters
+
+*   `initial`  initial state object
+
+#### Examples
+
+```javascript
+const store = observable({count: 0});
+
+const unsubscribe = store.subscribe((newState, oldState) => {
+  console.log(`count changed from ${oldState.count} to ${newState.count}`);
+});
+
+store.count = 10;
+unsubscribe();
+```
+
+Returns **any** proxied object
 
 ### on
 

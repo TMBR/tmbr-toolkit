@@ -22,14 +22,10 @@ export function observable(initial) {
 
   const proxy = new Proxy(initial, {
     set(state, key, value) {
-
-      if (state[key] !== value) {
-        const oldState = {...state};
-        state[key] = value;
-        const { subscribe, ...newState } = state;
-        subscribers.forEach(callback => callback(newState, oldState));
-      }
-
+      const oldState = {...state};
+      state[key] = value;
+      const { subscribe, ...newState } = state;
+      subscribers.forEach(callback => callback(newState, oldState));
       return true;
     }
   });

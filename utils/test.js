@@ -81,12 +81,11 @@ test('observable', () => {
   const callback = snoop(noop);
   const store = observable({count: 0});
   const unsubscribe = store.subscribe(callback.fn);
-  store.count = 10;
-  store.count = 10;
+  store.count = 1;
   unsubscribe();
-  store.count = 20;
+  store.count = 2;
   assert.ok(callback.calledOnce);
-  assert.equal(callback.firstCall.arguments[0].count, 10);
+  assert.equal(callback.firstCall.arguments[0].count, 1);
   assert.equal(callback.firstCall.arguments[1].count, 0);
 });
 
