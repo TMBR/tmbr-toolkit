@@ -11,6 +11,7 @@ import {
   isObject,
   on,
   noop,
+  observable,
   pipe,
   toJSON,
   traverse
@@ -36,7 +37,7 @@ test.before.each(() => {
   div = document.createElement('div');
 });
 
-test('combine', ctx => {
+test('combine', () => {
   const b = snoop(noop);
   const a = snoop(noop);
   const combined = combine(a.fn, undefined, null, 0, b.fn);
@@ -45,7 +46,7 @@ test('combine', ctx => {
   assert.equal(b.calls[0].arguments, ['foo', 'bar']);
 });
 
-test('cx', ctx => {
+test('cx', () => {
   const classes = cx('one', {'two': true, 'three': 0}, [true && 'four', null && 'five']);
   /*      */ cx(div, 'one', {'two': true, 'three': 0}, [true && 'four', null && 'five']);
   assert.is(classes, 'one two four');
@@ -74,6 +75,19 @@ test('isObject', () => {
   assert.not.ok(isObject([]));
   assert.not.ok(isObject(null));
   assert.not.ok(isObject(fn => fn));
+});
+
+test('observable', () => {
+  const callback = snoop(noop);
+  const store = observable({count: 0});
+  const unsubscribe = store.subscribe(callback.fn);
+  store.count = 10;
+  store.count = 10;
+  unsubscribe();
+  store.count = 20;
+  assert.ok(callback.calledOnce);
+  assert.equal(callback.firstCall.arguments[0].count, 10);
+  assert.equal(callback.firstCall.arguments[1].count, 0);
 });
 
 test('on', () => {

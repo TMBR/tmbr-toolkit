@@ -33,6 +33,7 @@ export { luminance } from './lib/luminance.js';
 export { map } from './lib/map.js';
 export { noop } from './lib/noop.js';
 export { normalize } from './lib/normalize.js';
+export { observable } from './lib/observable.js';
 export { on } from './lib/on.js';
 export { once } from './lib/once.js';
 export { PI, TWO_PI, HALF_PI  } from './lib/PI.js';
