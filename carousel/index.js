@@ -1,37 +1,37 @@
-import EmblaCarousel from 'embla-carousel';
-import EmblaCarouselClassNames from 'embla-carousel-class-names';
+import Embla from 'embla-carousel';
+import EmblaClassNames from 'embla-carousel-class-names';
 import { isString, isEmpty, findOne, findAll, attr, bind, fill, html } from '@tmbr/utils';
 
 class Carousel {
 
-  constructor(root, options, plugins = []) {
+  constructor(root, options = {}, plugins = []) {
 
-    bind(this);
+    bind(this, ['select']);
 
     const {
-      node = Carousel.customOptions.node,
-      prev = Carousel.customOptions.next,
-      next = Carousel.customOptions.next,
-      dots = Carousel.customOptions.dots,
+      node = Carousel.options.node || '[data-carousel-node]',
+      dots = Carousel.options.dots || '[data-carousel-dots]',
+      prev = Carousel.options.next || '[data-carousel-prev]',
+      next = Carousel.options.next || '[data-carousel-next]',
       ...rest
     } = options;
 
-    this.embla = new EmblaCarousel(this.find(node, root) || root.firstElementChild, {
-      ...Carousel.globalOptions,
+    this.embla = new Embla(this.#find(node, root) || root.firstElementChild, {
+      ...Carousel.options,
       ...rest
     }, [
       ...Carousel.plugins,
       ...plugins
     ]);
 
-    this.init({
-      dots: this.find(dots, root),
-      prev: this.find(prev, root),
-      next: this.find(next, root),
+    this.#init({
+      dots: this.#find(dots, root),
+      prev: this.#find(prev, root),
+      next: this.#find(next, root),
     });
 
     return new Proxy(this, {
-      get: (self, key) => self[key] || self.embla[key]
+      get: (self, key) => self[key] ?? self.embla[key]
     });
   }
 
@@ -43,7 +43,7 @@ class Carousel {
     return this.embla.slideNodes();
   }
 
-  init({dots, prev, next}) {
+  #init({dots, prev, next}) {
 
     const length = this.slides.length;
 
@@ -58,11 +58,18 @@ class Carousel {
     this.embla.on('select', this.select);
     this.select();
 
-    prev?.addEventListener('click', this.embla.scrollPrev);
-    next?.addEventListener('click', this.embla.scrollNext);
+    if (prev) {
+      attr(prev, 'aria-label', 'Previous Slide');
+      prev.addEventListener('click', this.embla.scrollPrev);
+    }
+
+    if (next) {
+      attr(next, 'aria-label', 'Next Slide');
+      next.addEventListener('click', this.embla.scrollNext);
+    }
   }
 
-  find(el, root) {
+  #find(el, root) {
     return isString(el) ? findOne(el, root) : el;
   }
 
@@ -72,19 +79,14 @@ class Carousel {
   }
 }
 
-Carousel.globalOptions = {
+Carousel.options = {
   // https://www.embla-carousel.com/api/options/
-};
-
-Carousel.customOptions = {
-  node: null,
-  prev: '.carousel-prev',
-  next: '.carousel-next',
-  dots: '.carousel-dots',
+  loop: true
 };
 
 Carousel.plugins = [
-  EmblaCarouselClassNames({draggable: 'cursor-grab', dragging: 'cursor-grabbing'})
+  // https://www.embla-carousel.com/plugins/
+  EmblaClassNames({inView: null})
 ];
 
 export default Carousel;

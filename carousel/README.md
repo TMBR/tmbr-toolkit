@@ -1,39 +1,56 @@
 # Carousel
 
-An extension of [Embla Carousel](https://www.embla-carousel.com/) that adds options for basic previous, next and pagination functionality.
+An extension of [Embla Carousel](https://www.embla-carousel.com/) that adds options for adding previous, next and pagination functionality.
 
 ## Differences from Embla
 
-The only difference to Embla is the first option, which expects a parent DOM element vs the target carousel element. This is used as the default context for finding the carousel, previous, next and pagination elements.
+The primary difference from Embla is the first argument, which expects a parent DOM element vs the target carousel element. This is used as the default context for finding the carousel, previous, next and pagination dots elements. Note that `aria-label` attributes will automatically be added where needed.
 
 ```html
-<div class="carousel" id="example">
+<div id="example">
 
-  <div>
-    <ul class="carousel-track">
-      <li class="carousel-slide">Slide 1</li>
-      <li class="carousel-slide">Slide 2</li>
-      <li class="carousel-slide">Slide 3</li>
+  <div data-carousel-node>
+    <ul>
+      <li>Slide 1</li>
+      <li>Slide 2</li>
+      <li>Slide 3</li>
     </ul>
   </div>
 
-  <button type="button" class="carousel-prev" aria-label="Previous Slide"></button>
-  <button type="button" class="carousel-next" aria-label="Next Slide"></button>
+  <button type="button" data-carousel-prev></button>
+  <button type="button" data-carousel-next></button>
 
-  <div class="carousel-dots"></div>
+  <div data-carousel-dots></div>
 
 </div>
 ```
 
+Base styles with [zero specificity](https://polypane.app/css-specificity-calculator/#selector=%3Awhere(%5Bdata-carousel-node%5D%20%3E%20*)) to be overridden as needed within different components:
+
 ```css
-.carousel-track {
+:where([data-carousel-node]) {
+  overflow: hidden;
+}
+:where([data-carousel-node] > *) {
   display: flex;
 }
-.carousel-slide {
+:where([data-carousel-node] > * > *) {
   flex: 0 0 100%;
   min-width: 0;
 }
 ```
+
+## Options
+There are four custom options in addition to what [Embla Carousel](https://www.embla-carousel.com/api/options/) supports.
+
+| Option | Type                  | Description |
+| ------ | --------------------- | ----------- |
+| `node` | `String` or `Element` | CSS selector or DOM element.<br>Defaults to `[data-carousel-node]` or the first element child of the root element. |
+| `dots` | `String` or `Element` | CSS selector or DOM element. Defaults to `[data-carousel-dots]`.<br>Looks for `button` elements or populates them if empty. |
+| `prev` | `String` or `Element` | CSS selector or DOM element. Defaults to `[data-carousel-prev]` |
+| `next` | `String` or `Element` | CSS selector or DOM element. Defaults to `[data-carousel-next]` |
+
+These can be overriden on a per-instance basis:
 
 ```js
 const root = document.getElementById('example');
@@ -45,43 +62,29 @@ const carousel = new Carousel(root, {
   dots: '.carousel-dots',
 });
 ```
-
-## Options
-There are four custom options in addition to the [Embla Carousel](https://www.embla-carousel.com/api/options/) defaults. Similar to Embla's [`globalOptions`](https://www.embla-carousel.com/api/options/#global-options) feature, these can all be overriden via:
+Or globally, which can also be used to set Embla's [`globalOptions`](https://www.embla-carousel.com/api/options/#global-options):
 
 ```js
-Carousel.customOptions = {
-  node: '.my-carousel-node',
-  prev: '.my-carousel-prev',
-  next: '.my-carousel-next',
-  dots: '.my-carousel-dots',
+Carousel.options = {
+  node: '.carousel-node',
+  dots: '.carousel-dots',
+  prev: '.carousel-prev',
+  next: '.carousel-next',
 };
 ```
 
-| Option | Type | Description |
-| ------ | ---- | ----------- |
-| `node` | `String` or `Element` | CSS selector or DOM element.<br>Defaults to the first element child of the root carousel element. |
-| `prev` | `String` or `Element` | CSS selector or DOM element. Defaults to `.carousel-prev` |
-| `next` | `String` or `Element` | CSS selector or DOM element. Defaults to `.carousel-next` |
-| `dots` | `String` or `Element` | CSS selector or DOM element. Defaults to `.carousel-dots`.<br>Looks for `button` elements or populates them if empty. |
-
 ## Plugins
 
-This carousel automatically includes the [Class Names](https://www.embla-carousel.com/plugins/class-names/) plugin with `cursor-grab` and `cursor-grabbing`, meant for use with the utility classes below. Additional plugins can be passeed in or overridden globaly via the `Carousel.plugins` array.
+This carousel automatically uses the [Class Names](https://www.embla-carousel.com/plugins/class-names/) plugin with the default settings, meant to be paired with the utility classes below. Additional plugins can be passed in as a third argument, or overridden globally via the `Carousel.plugins` array.
 
 ```css
-.cursor-grab {
-  cursor: grab;
-}
-.cursor-grabbing {
-  cursor: grabbing;
-}
+.is-draggable { cursor: grab }
+.is-dragging  { cursor: grabbing }
 ```
 
 ## Properties
 
-All of Embla's [methods](https://www.embla-carousel.com/api/methods/) are available, however, if you need to access the Embla instance it is available via `carousel.embla`.
-There are also two conveinece properties that access underlying Embla methods:
+All of Embla's [methods](https://www.embla-carousel.com/api/methods/) are proxied, however, if you need to access the Embla instance it is available via `carousel.embla`. There are also two conveinece properties that access underlying Embla methods:
 
 * `carousel.slides` = `embla.slideNodes()`
 * `carousel.index` = `embla.selectedScrollSnap()`
