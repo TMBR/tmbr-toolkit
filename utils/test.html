@@ -108,10 +108,15 @@ off && setTimeout(() => (console.log('off'), off()), 5000);
 // request.get('https://jsonplaceholder.typicode.com/users', null).then(console.log);
 // request('GET', 'https://jsonplaceholder.typicode.com/users').then(console.log);
 
-// setTimeout(() => console.log(cookie('name')), 1000);
-// setTimeout(() => cookie.delete('name'), 2000);
-// setTimeout(() => cookie('name', 'Angel'), 3000);
-// setTimeout(() => console.log(cookie('name')), 4000);
+
+// cookie('greeting', 'Hello');
+// setTimeout(() => console.log(cookie('greeting')), 100);
+// setTimeout(() => cookie('greeting', null), 200);
+// setTimeout(() => console.log(cookie('greeting')), 300);
+// cookie('example', 'Expire in 30 days', 30);
+// cookie('example', 'Expire on this date', new Date('2024-04-15'));
+// cookie('example', 'Custom cookie attributes', {SameSite: 'strict'});
+
 
 
 
@@ -145,7 +150,7 @@ off && setTimeout(() => (console.log('off'), off()), 5000);
 // instance.postMessage(1000);
 
 
-const el = document.getElementById('trap');
+/* const el = document.getElementById('trap');
 const btn = el.querySelector('button');
 const nav = el.querySelector('nav');
 let untrap;
@@ -160,7 +165,7 @@ btn.addEventListener('click', event => {
         elements.push(btn);
         return elements;
     });
-})
+}) */
 
 
 </script>
