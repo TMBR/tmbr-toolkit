@@ -33,6 +33,7 @@ Breaking changes introduced in version `2.0.0`:
 *   [cx](#cx)
 *   [debounce](#debounce)
 *   [distance](#distance)
+*   [dot](#dot)
 *   [fill](#fill)
 *   [findAll](#findall)
 *   [findOne](#findone)
@@ -96,7 +97,7 @@ Gets, sets or removes an attribute from an element
 *   `name`  attribute name
 *   `value`  attribute value
 
-Returns **any** value
+Returns **any** value (if getting) or undefined
 
 ### average
 
@@ -152,13 +153,13 @@ Combines functions into a single callback
 
 ### cookie
 
-Gets or sets a cookie with an optional expiration
+Gets or sets a cookie
 
 #### Parameters
 
 *   `name`  name of the cookie
 *   `value`  value to set (use `null` to delete)
-*   `expires`  number of days or [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object (defaults to session cookie)
+*   `options`  optional expiration days, [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) instance or object of attributes
 
 #### Examples
 
@@ -169,11 +170,12 @@ cookie('greeting', null);
 
 cookie('example', 'Expire in 30 days', 30);
 cookie('example', 'Expire on this date', new Date(...));
+cookie('example', 'Custom cookie attributes', {SameSite: 'strict'});
 ```
 
 ### coords
 
-Gets the x and y coordinates of a touch or click event,
+Gets the x and y coordinates of a pointer event,
 optionally relative to a target element
 
 #### Parameters
@@ -214,6 +216,18 @@ Calculates the distance between two points
 *   `y2` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** optional, y coordinate of the second point
 
 Returns **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** distance
+
+### dot
+
+Gets or sets a dot-notated path within a nested object
+
+#### Parameters
+
+*   `object`  target object
+*   `path`  string path
+*   `value`  optional value to set
+
+Returns **any** target object if setting (for chaining) or value if getting
 
 ### fill
 
@@ -483,7 +497,7 @@ Returns **any** function to remove all listeners
 
 ### once
 
-Wraps [on](#on) to create an event listener that can only fire once
+Wraps [on](#on) to create an event listener that will only fire once
 
 #### Parameters
 

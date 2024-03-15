@@ -6,6 +6,7 @@ import * as assert from 'uvu/assert';
 import {
   combine,
   cx,
+  dot,
   findAll,
   html,
   isObject,
@@ -44,6 +45,34 @@ test('combine', () => {
   combined('foo', 'bar');
   assert.equal(a.calls[0].arguments, ['foo', 'bar']);
   assert.equal(b.calls[0].arguments, ['foo', 'bar']);
+});
+
+test('dot', () => {
+
+  const o = {
+    u: undefined,
+    f: false,
+    n: null,
+    z: 0,
+    a: {b: {c: 'Colorado'}}
+  };
+
+  assert.is(dot(o, 'one.two'), undefined);
+  dot(o, 'one.two', 3);
+  assert.is(dot(o, 'one.two'), 3);
+
+  assert.is(dot(o, 'u'), undefined);
+  assert.is(dot(o, 'f'), false);
+  assert.is(dot(o, 'n'), null);
+  assert.is(dot(o, 'z'), 0);
+  assert.is(dot(o, 'x.y.z'), undefined);
+  assert.is(dot(o, 'a.poo'), undefined);
+  assert.is(dot({}, 'one.two', 3).one.two, 3);
+
+  assert.equal(dot(o, 'a.b'), {c: 'Colorado'});
+  assert.equal(dot(o, 'a.b.c', 'Minnesota'), o);
+  assert.equal(dot(o, 'a.b.c.d', 'Montana'), o);
+  assert.equal(dot(o, 'a.b.c'), {d: 'Montana'});
 });
 
 test('cx', () => {
@@ -155,7 +184,7 @@ test('traverse', () => {
   traverse(node, el => tags.push(el.nodeName.toLowerCase()));
   traverse(node, el => text.push(el.wholeText?.trim()), NodeFilter.SHOW_TEXT);
   assert.equal(tags.join(' '), 'div header h1 main p strong ul li li');
-  assert.equal(text.filter(Boolean).join(' '), 'Hello Lorem ipsum dolor testing Minnesota Colorado');
+  assert.equal(text.filter(Boolean).join(' '), 'Hello Lorem ipsum dolor Minnesota Colorado');
 });
 
 test.run();
