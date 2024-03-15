@@ -7,7 +7,7 @@ import { isBoolean } from './isBoolean.js';
  * @param name  - attribute name
  * @param value - attribute value
  *
- * @returns value
+ * @returns value (if getting) or undefined
  */
 export function attr(el, name, value) {
   if (arguments.length < 3) {
@@ -17,5 +17,4 @@ export function attr(el, name, value) {
   } else {
     el.removeAttribute(name);
   }
-  return value;
 };

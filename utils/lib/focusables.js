@@ -1,7 +1,7 @@
 const not = {
-  inert: ':not([inert]):not([inert] *)',
-  tabindex: ':not([tabindex^="-"])',
-  disabled: ':not(:disabled)',
+  inert    : ':not([inert]):not([inert] *)',
+  tabindex : ':not([tabindex^="-"])',
+  disabled : ':not(:disabled)',
 };
 
 /**
