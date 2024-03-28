@@ -46,6 +46,7 @@ class Carousel {
   #init({dots, prev, next}) {
 
     const length = this.slides.length;
+    attr(this.embla.rootNode(), 'aria-label', `carousel, ${length} slides`);
 
     this.dots = isEmpty(dots) ? [] : dots.children.length
       ? findAll('button', dots)
