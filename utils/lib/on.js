@@ -1,4 +1,6 @@
+import { isObject } from './isObject.js';
 import { isString } from './isString.js';
+import { combine } from './combine.js';
 
 /**
  * Adds an event listener to a target element or array of elements, or creates a delegate listener for the target selector string
@@ -11,6 +13,11 @@ import { isString } from './isString.js';
  * @returns function to remove all listeners
  */
 export function on(type, target, callback, scope = document) {
+
+  if (isObject(type)) {
+    const off = Object.keys(type).map(e => on(e, target, type[e], callback || scope));
+    return combine(...off);
+  }
 
   const controller = new AbortController();
   const signal = controller.signal;
