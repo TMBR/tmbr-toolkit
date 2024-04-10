@@ -28,6 +28,9 @@ store.subscribe('greeting', callback);
 // subscribe to a multiple state keys
 store.subscribe(['greeting', 'name'], callback);
 
+// subscribe without the initial callback invocation
+store.subscribe(key, callback, false);
+
 // set a single property
 store.set('greeting', 'Hi');
 
@@ -40,6 +43,7 @@ store.set(state => ({greeting: 'Aloha'});
 // get a single property
 store.get('name');
 store.get().name;
+store.state.name;
 
 // get a copy of the full state object
 store.get();
