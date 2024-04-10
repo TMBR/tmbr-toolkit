@@ -82,7 +82,7 @@ Breaking changes introduced in version `2.0.0`:
 *   [toRGB](#torgb)
 *   [trap](#trap)
 *   [traverse](#traverse)
-*   [now](#now)
+*   [uid](#uid)
 *   [wait](#wait)
 *   [worker](#worker)
 *   [wrap](#wrap)
@@ -741,9 +741,14 @@ Recursively passes a DOM element's children to the provided callback
 *   `callback`  function to be called for each child element
 *   `filter`  filter passed to [createTreeWalker](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTreeWalker) (defaults to `NodeFilter.SHOW_ELEMENT`)
 
-### now
+### uid
 
 Generates a unique base 16 string with an optional prefix or suffix.
+
+#### Parameters
+
+*   `prefix`   (optional, default `''`)
+*   `suffix`   (optional, default `''`)
 
 ### wait
 
