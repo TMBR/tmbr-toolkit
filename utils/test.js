@@ -10,9 +10,9 @@ import {
   findAll,
   html,
   isObject,
-  on,
   noop,
   observable,
+  on,
   pipe,
   toJSON,
   traverse
@@ -107,15 +107,26 @@ test('isObject', () => {
 });
 
 test('observable', () => {
-  const callback = snoop(noop);
-  const store = observable({count: 0});
-  const unsubscribe = store.subscribe(callback.fn);
+
+  const cb1 = snoop(noop);
+  const cb2 = snoop(noop);
+  const store = observable({count: 0}, cb1.fn);
+  const unsubscribe = store.subscribe(cb2.fn);
+
+  store.count = 1;
   store.count = 1;
   unsubscribe();
   store.count = 2;
-  assert.ok(callback.calledOnce);
-  assert.equal(callback.firstCall.arguments[0].count, 1);
-  assert.equal(callback.firstCall.arguments[1].count, 0);
+
+  // callback passed on creation
+  assert.ok(cb1.callCount === 2);
+  assert.equal(cb1.firstCall.arguments[0].count, 1);
+  assert.equal(cb1.firstCall.arguments[1].count, 0);
+
+  // callback passed to subscribe
+  assert.ok(cb2.callCount === 1);
+  assert.equal(cb2.firstCall.arguments[0].count, 1);
+  assert.equal(cb2.firstCall.arguments[1].count, 0);
 });
 
 test('on', () => {
