@@ -33,6 +33,18 @@ test('emit an event with data', () => {
   assert.equal(func.firstCall.result, data);
 });
 
+test('emit an event with multiple arguments', () => {
+  const a = {count: 1};
+  const b = 'hello';
+  let c;
+  const func = snoop(noop);
+  events.on('test', func.fn);
+  events.emit('test', a, b, c);
+  assert.equal(func.firstCall.arguments[0].count, 1);
+  assert.equal(func.firstCall.arguments[1], 'hello');
+  assert.equal(func.firstCall.arguments[2], undefined);
+});
+
 test('unsubscribe via return function', () => {
   const func = snoop(noop);
   const off = events.on('test', func.fn);

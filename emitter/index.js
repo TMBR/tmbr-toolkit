@@ -16,9 +16,9 @@ class Emitter {
     return this.#events.hasOwnProperty(type) && this.#events[type].size > 0;
   }
 
-  emit(type, data) {
+  emit(type, ...args) {
     if (this.#events === null) return;
-    this.#events[type]?.forEach((context, callback) => callback.call(context, data));
+    this.#events[type]?.forEach((context, callback) => callback.call(context, ...args));
   }
 
   destroy() {
