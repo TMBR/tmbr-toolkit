@@ -29,8 +29,8 @@ export function on(type, target, callback, scope = document) {
 
     function listener(event) {
       const match = event.bubbles
-        ? event.target.closest && event.target.closest(selector)
-        : event.target.matches && event.target.matches(selector);
+        ? event.target.closest?.(selector)
+        : event.target.matches?.(selector);
       match && callback(event);
     }
 
