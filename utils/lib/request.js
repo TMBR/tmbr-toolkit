@@ -21,7 +21,7 @@
  * request.headers['Authorization'] = `Bearer ${token}`;
  * request.post('/login', {username, password});
  *
- * @return {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise Promise} that resolves to the JSON response
+ * @return {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise Promise} that resolves with JSON or the response from a custom handler
  */
 export function request(method, url, data, options = {}) {
 
@@ -53,14 +53,6 @@ request.handler = res => new Promise((resolve, reject) => {
   });
 });
 
-const methods = [
-  'GET',
-  'POST',
-  'PUT',
-  'PATCH',
-  'DELETE',
-];
-
-methods.forEach(method => {
+['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].forEach(method => {
   request[method.toLocaleLowerCase()] = (...args) => request(method, ...args);
 });
