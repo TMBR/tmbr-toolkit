@@ -5,5 +5,7 @@
  * @return {number} radians
  */
 export function toRadians(degrees) {
-  return degrees * Math.PI / 180;
+  return degrees * TO_RADIANS;
 };
+
+export const TO_RADIANS = Math.PI / 180;
