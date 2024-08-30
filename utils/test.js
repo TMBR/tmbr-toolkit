@@ -127,6 +127,14 @@ test('observable', () => {
   assert.ok(cb2.callCount === 1);
   assert.equal(cb2.firstCall.arguments[0].count, 1);
   assert.equal(cb2.firstCall.arguments[1].count, 0);
+
+  // callbacks receive key that changed
+  assert.equal(cb1.calls[0].arguments[2], 'count');
+  assert.equal(cb2.calls[0].arguments[2], 'count');
+
+  // subscribe is removed from state arguments
+  assert.equal(cb1.calls[0].arguments[0].subscribe, undefined);
+  assert.equal(cb1.calls[0].arguments[1].subscribe, undefined);
 });
 
 test('on', () => {

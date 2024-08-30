@@ -10,8 +10,8 @@
  * @example
  * const store = observable({count: 0});
  *
- * const unsubscribe = store.subscribe((newState, oldState) => {
- *   console.log(`count changed from ${oldState.count} to ${newState.count}`);
+ * const unsubscribe = store.subscribe((newState, oldState, key) => {
+ *   console.log(`${key} changed from ${oldState.count} to ${newState.count}`);
  * });
  *
  * store.count = 10;
@@ -24,10 +24,10 @@ export function observable(initial, callback) {
   const proxy = new Proxy(initial, {
     set(state, key, value) {
       if (state[key] === value) return true;
-      const oldState = {...state};
+      const { subscribe: oldSubscribe, ...oldState } = state;
       state[key] = value;
-      const { subscribe, ...newState } = state;
-      subscribers.forEach(callback => callback(newState, oldState));
+      const { subscribe: newSubscribe, ...newState } = state;
+      subscribers.forEach(callback => callback(newState, oldState, key));
       return true;
     }
   });
