@@ -1,3 +1,4 @@
+import { isEmpty } from './isEmpty.js';
 import { isObject } from './isObject.js';
 import { isString } from './isString.js';
 import { combine } from './combine.js';
@@ -31,7 +32,15 @@ export function on(type, target, callback, scope = document) {
       const match = event.bubbles
         ? event.target.closest?.(selector)
         : event.target.matches?.(selector);
-      match && callback(event);
+
+      if (isEmpty(match)) {
+        return;
+      }
+      if (event.bubbles && !event.target.matches(selector)) {
+        Object.defineProperty(event, 'target', {enumerable: true, value: match});
+      }
+
+      callback(event);
     }
 
     events.forEach(e => {
