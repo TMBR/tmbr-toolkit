@@ -27,14 +27,14 @@ export function observable(initial, callback) {
       const { subscribe: oldSubscribe, ...oldState } = state;
       state[key] = value;
       const { subscribe: newSubscribe, ...newState } = state;
-      subscribers.forEach(callback => callback(newState, oldState, key));
+      subscribers.forEach(fn => fn(newState, oldState, key));
       return true;
     }
   });
 
-  proxy.subscribe = function(callback) {
-    subscribers.push(callback);
-    return () => subscribers.splice(subscribers.indexOf(callback), 1);
+  proxy.subscribe = function(fn) {
+    subscribers.push(fn);
+    return () => subscribers.splice(subscribers.indexOf(fn), 1);
   };
 
   callback && proxy.subscribe(callback);
