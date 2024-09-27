@@ -79,12 +79,6 @@ let off;
 // off = on('click mouseenter', a, e => console.log(e.type, e.target === a));
 // off = on('click mouseenter', buttons, e => console.log(e.type, e.target.matches('.button')));
 
-const events = {
-    click      : e => console.log(e.type, e.target, e.currentTarget.nodeName),
-    mouseenter : e => console.log(e.type, e.target, e.currentTarget.nodeName),
-};
-
-off = on(events, '.button');
 // off = on(events, '.button', div);
 // off = on(events, a);
 // off = on(events, buttons);
