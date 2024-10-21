@@ -59,6 +59,7 @@ export { toRGB } from './lib/toRGB.js';
 export { trap } from './lib/trap.js';
 export { traverse } from './lib/traverse.js';
 export { uid } from './lib/uid.js';
+export { validate } from './lib/validate.js';
 export { wait } from './lib/wait.js';
 export { worker } from './lib/worker.js';
 export { wrap } from './lib/wrap.js';
