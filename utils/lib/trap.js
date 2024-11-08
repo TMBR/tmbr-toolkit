@@ -8,11 +8,11 @@ import { wrap } from './wrap.js';
  *
  * @return function to untrap
  */
-export function trap(node, callback) {
+export function trap(el, callback) {
 
   const previous = document.activeElement;
 
-  let elements = findAll(focusables.join(','), node);
+  let elements = findAll(focusables.join(','), el);
   if (isFunction(callback)) elements = callback(elements);
 
   elements[0].focus();

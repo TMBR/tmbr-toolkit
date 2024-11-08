@@ -83,6 +83,7 @@ Breaking changes introduced in version `2.0.0`:
 *   [trap](#trap)
 *   [traverse](#traverse)
 *   [uid](#uid)
+*   [validate](#validate)
 *   [wait](#wait)
 *   [worker](#worker)
 *   [wrap](#wrap)
@@ -465,14 +466,15 @@ instance with a `subscribe` method that can be used to respond to state changes
 #### Parameters
 
 *   `initial`  initial state object
+*   `callback`  optional subscribed callback function
 
 #### Examples
 
 ```javascript
 const store = observable({count: 0});
 
-const unsubscribe = store.subscribe((newState, oldState) => {
-  console.log(`count changed from ${oldState.count} to ${newState.count}`);
+const unsubscribe = store.subscribe((newState, oldState, key) => {
+  console.log(`${key} changed from ${oldState.count} to ${newState.count}`);
 });
 
 store.count = 10;
@@ -726,7 +728,7 @@ Traps focus on the given element with an optional callback to modify the array o
 
 #### Parameters
 
-*   `node` &#x20;
+*   `el` &#x20;
 *   `callback` &#x20;
 
 Returns **any** function to untrap
@@ -737,7 +739,7 @@ Recursively passes a DOM element's children to the provided callback
 
 #### Parameters
 
-*   `node`  root element to travese
+*   `el`  root element to travese
 *   `callback`  function to be called for each child element
 *   `filter`  filter passed to [createTreeWalker](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTreeWalker) (defaults to `NodeFilter.SHOW_ELEMENT`)
 
@@ -749,6 +751,43 @@ Generates a unique base 16 string with an optional prefix or suffix.
 
 *   `prefix`   (optional, default `''`)
 *   `suffix`   (optional, default `''`)
+
+### validate
+
+Validates data against a set of rules
+
+#### Parameters
+
+*   `data` &#x20;
+*   `rules` &#x20;
+
+#### Examples
+
+```javascript
+const data = {
+  email: 'hello@example.com',
+  password: 'password',
+  confirm: null
+};
+
+const rules = {
+  email(value) {
+    return /.+\@.+\..+/.test(value) || 'Invalid email';
+  },
+  password(value) {
+    if (!value) return 'Required';
+    return value.length >= 8 || 'Must be at least 8 characters';
+  },
+  confirm(value, data) {
+    if (!value) return 'Required';
+    return value === data.password || 'Must match your password';
+  },
+};
+
+const errors = validate(data, rules);
+```
+
+Returns **any** errors object or null if all keys passed validation
 
 ### wait
 

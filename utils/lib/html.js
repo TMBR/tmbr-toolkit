@@ -27,9 +27,9 @@ export function html(strings, ...vars) {
 
   const content = template.content;
 
-  [...content.querySelectorAll('[append]')].forEach((node, i) => {
-    node.before(appends[i]);
-    node.remove()
+  [...content.querySelectorAll('[append]')].forEach((el, i) => {
+    el.before(appends[i]);
+    el.remove()
   });
 
   return content.childElementCount === 1 ? content.firstElementChild : content;

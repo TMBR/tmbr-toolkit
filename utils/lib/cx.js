@@ -9,10 +9,10 @@ import { isArray } from './isArray.js';
  */
 export function cx(...args) {
 
-  const node = isElement(args[0]) ? args.shift() : null;
+  const el = isElement(args[0]) ? args.shift() : null;
 
-  if (node && args.length === 0) {
-    return node.classList;
+  if (el && args.length === 0) {
+    return el.classList;
   }
 
   const classes = args.reduce((result, item) => {
@@ -22,7 +22,7 @@ export function cx(...args) {
     return item ? result.concat(item) : result;
   }, []);
 
-  return node
-    ? classes.forEach(([name, bool]) => node.classList[bool ? 'add' : 'remove'](name))
+  return el
+    ? classes.forEach(([name, bool]) => el.classList[bool ? 'add' : 'remove'](name))
     : classes.filter (([name, bool]) => bool).map(([name]) => name).join(' ');
 };
