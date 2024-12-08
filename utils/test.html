@@ -74,10 +74,16 @@ let off;
 // off = on('click', '.button', e => console.log(e.currentTarget), div);
 // off = on('click', a, e => console.log(e.type, e.target === a));
 // off = on('click', buttons, e => console.log(buttons.includes(event.target)));
+
 // off = on('click mouseenter', '.button', e => console.log(e.target.matches('.button')));
 // off = on('click mouseenter', '.button', e => console.log(e.currentTarget), div);
 // off = on('click mouseenter', a, e => console.log(e.type, e.target === a));
 // off = on('click mouseenter', buttons, e => console.log(e.type, e.target.matches('.button')));
+
+// off = on(['click', 'mouseenter'], '.button', e => console.log(e.target.matches('.button')));
+// off = on(['click', 'mouseenter'], '.button', e => console.log(e.currentTarget), div);
+// off = on(['click', 'mouseenter'], a, e => console.log(e.type, e.target === a));
+// off = on(['click', 'mouseenter'], buttons, e => console.log(e.type, e.target.matches('.button')));
 
 // off = on(events, '.button', div);
 // off = on(events, a);
