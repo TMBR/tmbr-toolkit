@@ -34,6 +34,7 @@ Breaking changes introduced in version `2.0.0`:
 *   [debounce](#debounce)
 *   [distance](#distance)
 *   [dot](#dot)
+*   [empty](#empty)
 *   [fill](#fill)
 *   [findAll](#findall)
 *   [findOne](#findone)
@@ -229,6 +230,22 @@ Gets or sets a dot-notated path within a nested object
 *   `value`  optional value to set
 
 Returns **any** target object if setting (for chaining) or value if getting
+
+### empty
+
+Efficiently clears the DOM tree from the target element by removing all children,
+which is can be significantly faster than using `innerHTML`
+
+#### Parameters
+
+*   `el` &#x20;
+
+#### Examples
+
+```javascript
+const div = document.querySelector('.example');
+empty(div).append(fragment);
+```
 
 ### fill
 
@@ -489,11 +506,11 @@ Adds an event listener to a target element or array of elements, or creates a de
 
 #### Parameters
 
-*   `type` &#x20;
+*   `events` &#x20;
 *   `target`  target element, array of elements or a CSS selector for event delegation
 *   `callback`  callback function
 *   `scope`  optional parent scope (optional, default `document`)
-*   `event`  name of event (or multiple events separated by spaces)
+*   `event`  name of event, or multiple events as either an array or space-separated spring
 
 Returns **any** function to remove all listeners
 

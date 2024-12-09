@@ -10,6 +10,7 @@ export { cx } from './lib/cx.js';
 export { debounce } from './lib/debounce.js';
 export { distance } from './lib/distance.js';
 export { dot } from './lib/dot.js';
+export { empty } from './lib/empty.js';
 export { fill } from './lib/fill.js';
 export { findAll } from './lib/findAll.js';
 export { findOne } from './lib/findOne.js';
