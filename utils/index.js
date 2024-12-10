@@ -47,6 +47,7 @@ export { rect } from './lib/rect.js';
 export { request } from './lib/request.js';
 export { ro } from './lib/ro.js';
 export { round } from './lib/round.js';
+export { safe } from './lib/safe.js';
 export { shuffle } from './lib/shuffle.js';
 export { slug } from './lib/slug.js';
 export { svg } from './lib/svg.js';

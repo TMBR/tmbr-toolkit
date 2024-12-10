@@ -14,6 +14,7 @@ import {
   observable,
   on,
   pipe,
+  safe,
   toJSON,
   traverse
 } from './index.js';
@@ -177,6 +178,13 @@ test('pipe', () => {
     value => `${value}!`
   );
   assert.equal(fn('Hello, World?'), 'HELLOWORLD!');
+});
+
+test('safe', async () => {
+  const errorTrigger = async () => fail();
+  const errorHandler = snoop(noop);
+  await safe(errorTrigger, errorHandler.fn)();
+  assert.ok(errorHandler.called);
 });
 
 test('toJSON', () => {
