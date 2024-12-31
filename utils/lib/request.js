@@ -23,16 +23,17 @@
  *
  * @return {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise Promise} that resolves with JSON or the response from a custom handler
  */
-export function request(method, url, data, options = {}) {
 
-  options.method = method;
-  options.headers = Object.assign(request.headers, options.headers);
+function req(method, url, data, options = {}) {
 
-  if ( ! url.startsWith('http')) {
+  options.method = method.toUpperCase();
+  options.headers = Object.assign({...request.headers}, options.headers);
+
+  if (!url.startsWith('http')) {
     url = `/${url.startsWith('/') ? url.slice(1) : url}`;
   }
 
-  if (method.toUpperCase() === 'GET') {
+  if (options.method === 'GET') {
     const params = new URLSearchParams(data || '').toString();
     params && (url += `${url.includes('?') ? '&' : '?'}${params}`);
   } else {
@@ -40,19 +41,25 @@ export function request(method, url, data, options = {}) {
   }
 
   return fetch(url, options).then(request.handler);
-};
+}
 
-request.headers = {
+const headers = {
   'Content-Type': 'application/json'
 };
 
-request.handler = res => new Promise((resolve, reject) => {
+const handler = res => new Promise((resolve, reject) => {
   res.text().then(body => {
     const data = JSON.parse(body || null);
     res.ok ? resolve(data) : reject({errors: data, status: res.status});
   });
 });
 
-['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].forEach(method => {
-  request[method.toLocaleLowerCase()] = (...args) => request(method, ...args);
+export const request = /* @__PURE__ */ Object.assign(req, {
+  headers,
+  handler,
+  get:    (...args) => req('GET', ...args),
+  post:   (...args) => req('POST', ...args),
+  put:    (...args) => req('PUT', ...args),
+  patch:  (...args) => req('PATCH', ...args),
+  delete: (...args) => req('DELETE', ...args)
 });

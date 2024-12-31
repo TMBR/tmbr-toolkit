@@ -1,3 +1,5 @@
+const TO_DEGREES = /* @__PURE__ */ (() => 180 / Math.PI)();
+
 /**
  * Converts radians to degrees
  *
@@ -7,5 +9,3 @@
 export function toDegrees(radians) {
   return radians * TO_DEGREES;
 };
-
-export const TO_DEGREES = 180 / Math.PI;
