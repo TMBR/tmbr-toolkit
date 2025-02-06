@@ -6,5 +6,5 @@
  * @return {function}
  */
 export function pipe(...fns) {
-  return input => fns.reduce((acc, fn) => fn(acc), input);
+  return input => fns.reduce((result, fn) => fn(result), input);
 };

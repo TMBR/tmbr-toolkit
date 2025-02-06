@@ -22,6 +22,8 @@
  * request.post('/login', {username, password});
  *
  * @return {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise Promise} that resolves with JSON or the response from a custom handler
+ *
+ * @alias request
  */
 
 function req(method, url, data, options = {}) {
