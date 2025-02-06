@@ -71,6 +71,7 @@ Breaking changes introduced in version `2.0.0`:
 *   [request](#request)
 *   [ro](#ro)
 *   [round](#round)
+*   [safe](#safe)
 *   [shuffle](#shuffle)
 *   [slug](#slug)
 *   [svg](#svg)
@@ -330,6 +331,10 @@ Returns **any** unobserve cleanup function
 
 Checks if a value is an array using [Array.isArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray))
 
+#### Parameters
+
+*   `value` &#x20;
+
 ### isBoolean
 
 Checks if a value is either `true` or `false`
@@ -541,7 +546,7 @@ Returns **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference
 
 ### pledge
 
-Creates an object with a reference to a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that can be resolved or rejected externally
+Creates an object with a reference to a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that can be resolved or rejected externally (consider using [Promise.withResolvers()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers) instead)
 
 Returns **any** object with a `resolve` function, a `reject` function and the `promise` instance
 
@@ -632,6 +637,15 @@ Rounds a value to the specificed number of decimal places
 *   `precision`  decimal places (optional, default `2`)
 
 Returns **any** rounded value
+
+### safe
+
+[Async/Await Error Handling](https://wesbos.com/javascript/12-advanced-flow-control/71-async-await-error-handling)
+
+#### Parameters
+
+*   `fn`  try function
+*   `errorHandler`  catch function
 
 ### shuffle
 
