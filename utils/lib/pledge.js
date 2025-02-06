@@ -1,5 +1,5 @@
 /**
- * Creates an object with a reference to a {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise Promise} that can be resolved or rejected externally
+ * Creates an object with a reference to a {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise Promise} that can be resolved or rejected externally (consider using the new {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers Promise.withResolvers()})
  *
  * @return object with a `resolve` function, a `reject` function and the `promise` instance
  */
